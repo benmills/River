@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>River</title>
+	<link rel="stylesheet" href="/media/css/reset.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	<link rel="stylesheet" href="/media/css/frontend.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	<link rel="stylesheet" href="/media/css/markdown.css" type="text/css" media="screen" title="no title" charset="utf-8">
+</head>
+
+<body>
+<div id="main">
+	<div id="header">
+		<h1><a href="{% url main_stream %}">Appventurous</a> <span class='project'>{% block project_name %}
+
+		{% endblock %}</span></h1>
+		<div id="user_info">
+			Welcome back {{user.get_profile.get_name}}
+			<p class='controls'>
+				<a href="{% url log_out %}">Logout</a> | <a href="{% url user_profile %}">Profile</a>
+			</p>
+		</div>
+		{% block header %}
+			
+		{% endblock %}
+	</div>
+	
+	<div id="content">
+		{% block content %}
+			
+		{% endblock %}
+	</div>
+	
+	<div id="footer">
+		<p>This is all the stuff I couldn't figure out where to put... its 1am!</p>
+		<p>Projects: <a href="#">Create Project</a></p>
+	</div>
+</div>
+</body>
+<script src="/media/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+{% block js %}{% endblock %}
+</html>

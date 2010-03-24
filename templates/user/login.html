@@ -1,0 +1,10 @@
+{% extends "skeleton.html" %}
+
+{% block content %}
+	<h2>Log In</h2>
+	<form action="." method="post" class='edit'>
+		{{ form.as_p }}
+		<input type="hidden" id="next" name="next" value="{{ next }}" />
+		<input type="submit" value="Login" /> <a href="{% url register %}">Register</a>
+	</form>
+{% endblock %}

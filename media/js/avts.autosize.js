@@ -1,0 +1,1 @@
+$('textarea.autosize').autoResize();

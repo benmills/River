@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block project_name %}| Create Project{% endblock %}
+
+{% block content %}	
+	<div id="box">
+		<form method="post" class='edit'>
+			{{form.as_p}}
+			<input type="submit" value="Create Project" > <a href="{% url main_stream  %}">Nevermind</a>
+		</form>
+	</div>
+{% endblock %}

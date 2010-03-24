@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load markup %}
+
+{% block js %}
+	<script src="/media/js/jquery.autosize.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/media/js/avts.autosize.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/media/js/avts.edit.js" type="text/javascript" charset="utf-8"></script>
+{% endblock %}
+
+{% block project_name %}{% if post.project %}| <a href="{% url project post.project.id %}">{{post.project.title}}</a>{% endif %}{% endblock %}
+
+{% block content %}	
+	<div id="stream">
+		
+		<div class='post_info'>
+			<span class='controls'>
+				<a class='left' href="#">Pin to your board</a><a class='right' href="#">Add to your tasks</a>
+			</span>
+			<div class='info'><strong>Author:</strong> {{post.author.get_profile.get_name}}</div>
+			<div class='info'><strong>Date:</strong> {{post.posted_date|date:"D d, M Y"}}</div>
+			{% if post.project %}
+			<div class='info'><strong>Project:</strong> <a href="{% url project post.project.id %}">{{post.project.title}}</a></div>
+			{% endif %}
+			{% ifequal user post.author  %}
+			<div class='info'><strong>Controls:</strong> <a href="#" class='show_edit_form'>Edit</a></div>
+			{% endifequal %}
+		</div>
+		
+		<div class='item'>
+			<span class='post_text'>{{post.content|urlize|textile}}</span>
+			{% ifequal user post.author  %}
+				<form class="edit_form" method="post" action="{% url edit_post post.id %}">
+					<textarea name='content'>{{post.content}}</textarea>
+					<input type="submit" value="Save Changes"> <a href="#" class="cancel_edit">Nevermind</a>
+				</form>
+			{% endifequal %}
+		</div>
+		
+		
+		<div class='comments'>
+			{% for comment in post.comment_set.all %}
+				<div class='comment'>
+					{{comment.comment|linebreaksbr|urlize|markdown}}
+					<div class="info">
+						Posted by {{comment.author.get_profile.get_name}} {{comment.posted_date|timesince}} ago
+					</div>
+				</div>
+			{% empty %}
+				<div class='comment last'>
+					There are no comments yet.
+				</div>
+			{% endfor %}
+		</div>
+		
+		<form method="post" class='add_comment' id="comments">
+			<textarea class='autosize' name='comment'></textarea>
+			<input type='submit' value='Add Comment' />
+		</form>
+		
+	</div>
+{% endblock %}
