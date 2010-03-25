@@ -130,7 +130,7 @@ a:hover {
 		#stream .item.odd {
 			background: #fbfbfc;
 		}
-		#stream .item:hover {
+		#stream .items .item:hover {
 			background: #fbf2d1;
 		}
 		#stream .item .info {
