@@ -15,8 +15,10 @@
 		</span>
 	</div>
 	{% ifnotequal s.posted_date|date:"d/m/Y/H:i:s" s.updated|date:"d/m/Y/H:i:s"  %}
-	<div class='latest_comment'>
-		{% comment s.last_comment %}
-	</div>
+		{% if s.last_comment %}
+			<div class='latest_comment'>
+				{% comment s.last_comment %}
+			</div>
+		{% endif %}
 	{% endifnotequal %}
 </div>

@@ -57,6 +57,7 @@ a:hover {
 		background: #2d73af;
 		color: #FFF;
 		width: 200px;
+		text-shadow: #1b5b91 1px 1px 1px;
 	}
 	#user_info .controls {
 		margin: 3px 0px 0px 0px;
@@ -73,11 +74,12 @@ a:hover {
 }
 	#poster textarea {
 		margin: -3px 0px 0px 0px; padding: 10px;
-		-webkit-box-shadow: #dddddd 0px 0px 8px;
 		border: none;
 		width: 1030px;
 		font-size: 18px;
 		height: 20px;
+		-webkit-box-shadow: #dddddd 0px 0px 8px;
+		-moz-box-shadow: #dddddd 0px 0px 8px;
 	}
 	#poster .controls {
 		padding: 3px 0px;
@@ -117,6 +119,7 @@ a:hover {
 	width: auto;
 	min-width: 630px;
 	-webkit-box-shadow: #dddddd 0px 0px 8px;
+	-moz-box-shadow: #dddddd 0px 0px 8px;
 }
 	#stream.full_width {
 		float: none;
@@ -198,12 +201,16 @@ a:hover {
 			background: #7acd7a;
 			-webkit-border-top-left-radius: 10px;
 			-webkit-border-bottom-left-radius: 10px;
+			-moz-border-top-left-radius: 10px;
+			-moz-border-bottom-left-radius: 10px;
 		}
 		.post_info .controls a.right {
 			padding: 3px 6px 3px 3px;
 			background: #2d73af;
 			-webkit-border-top-right-radius: 10px;
 			-webkit-border-bottom-right-radius: 10px;
+			-moz-border-top-right-radius: 10px;
+			-moz-border-bottom-right-radius: 10px;
 		}
 				
 /* Comments */

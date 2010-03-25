@@ -20,7 +20,9 @@ class Post(models.Model):
 		
 	def last_comment(self):
 		comments = self.comment_set.all()
-		return comments[len(comments)-1]
+		if len(comments) > 0:
+			return comments[len(comments)-1]
+		else: return None
 		
 	def get_title(self):
 		lines = self.content.split('\n')

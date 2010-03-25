@@ -34,7 +34,7 @@ sub {
 
 .item ol {
 	list-style: decimal;
-	padding: 0px 0px 0px 20px;
+	padding: 0px 0px 0px 25px;
 }
 
 .item p:first-child, .item p:last-child  {

@@ -2,10 +2,12 @@
 {% load markup %}
 {% load post_tags %}
 
-{% block project_name %}{% if post.project %}| <a href="{% url project post.project.id %}">{{post.project.title}}</a>{% endif %}{% endblock %}
+{% block js %}
+	<script src="/media/js/avts.edit.js" type="text/javascript" charset="utf-8"></script>
+{% endblock %}
 
 {% block content %}	
-	<div id="stream">
+	<div id="stream" class="full_width">
 		
 		<div class='post_info'>
 			<span class='controls'>
