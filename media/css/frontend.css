@@ -130,6 +130,9 @@ a:hover {
 		#stream .item.odd {
 			background: #fbfbfc;
 		}
+		#stream .item:hover {
+			background: #fbf2d1;
+		}
 		#stream .item .info {
 			margin: 3px 0px 0px 0px;
 			font-size: 12px;
