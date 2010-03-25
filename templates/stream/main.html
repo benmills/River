@@ -1,49 +1,7 @@
 {% extends "base.html" %}
-{% load markup %}
-
-{% block js %}
-	<script src="/media/js/jquery.autosize.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/media/js/avts.autosize.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/media/js/avts.script.js" type="text/javascript" charset="utf-8"></script>
-{% endblock %}
+{% load post_tags %}
 
 {% block content %}
-	<div id="poster">
-		<form method="post">
-			<textarea name="content" class='autosize' id="poster_textarea">Type your message here...</textarea>
-			<div class="controls">
-				<input type="submit" value="Post in" id="Add" />
-				<select name="project">
-					<option value="0">Main Stream</option>
-					{% for p in projects %}
-						<option value="{{p.id}}">{{p.title}}</option>
-					{% endfor %}
-				</select>
-			</div>
-		</form>
-	</div>
-	
-	<div id="stream">
-		{% for s in stream %}
-			<div class='item'>
-				{% if s.content %}
-					{{s.content|urlize|textile}}
-					<div class='info'>
-						Posted by {{s.author.get_profile.get_name}} {{s.posted_date|timesince}} ago
-						{% if s.project %}
-							in <a href="{% url project s.project.id %}">{{s.project.title}}</a>
-						{% endif %} | <a href="{% url post s.id %}">View this post</a> | <a href="{% url post s.id %}#comments">{{s.comment_count}}</a>
-						<span class='controls'>
-							<a class='left' href="#">Pin to your board</a><a class='right' href="#">Add to your tasks</a>
-						</span>
-					</div>
-				{% else %}
-					{{s.author.get_profile.get_name}} made a <a href="{% url post s.post.id %}#comments">comment</a> on a post
-					<span class='info'>
-						{{s.posted_date|timesince}} ago
-					</span>
-				{% endif %}
-			</div>
-		{% endfor %}
-	</div>
+	{% poster %}
+	{% post_stream %}
 {% endblock %}

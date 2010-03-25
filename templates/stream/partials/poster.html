@@ -1,0 +1,18 @@
+<div id="poster">
+	<form method="post">
+		<textarea name="content" class='autosize' id="poster_textarea">Type your message here...</textarea>
+		<div class="controls">
+			<input type="submit" value="Post in" id="Add" />
+			<select name="project">
+				<option value="0">Main Stream</option>
+				{% for p in projects %}
+					{% ifequal p.id project_id  %}
+						<option selected='true' value="{{p.id}}">{{p.title}}</option>
+					{% else %}
+						<option value="{{p.id}}">{{p.title}}</option>
+					{% endifequal %}
+				{% endfor %}
+			</select>
+		</div>
+	</form>
+</div>

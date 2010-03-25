@@ -1,10 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 from project.models import Project
+
 import datetime
 
 class Post(models.Model):
 	posted_date = models.DateTimeField(default=datetime.datetime.now)
+	updated = models.DateTimeField(auto_now=True)
 	content = models.TextField()
 	author = models.ForeignKey(User, related_name="posts")
 	assigned = models.ManyToManyField(User, related_name="assigned_tasks")
@@ -15,12 +17,26 @@ class Post(models.Model):
 		if count == 0: return "No Comments"
 		if count == 1: return "%s Comment" % count
 		else:  return "%s Comments" % count
+		
+	def last_comment(self):
+		comments = self.comment_set.all()
+		return comments[len(comments)-1]
+		
+	def get_title(self):
+		lines = self.content.split('\n')
+		for l in lines:
+			words = l.split(' ')
+			if len(words) >= 2:
+				if words[0] == 'h1.':
+					return words[1]
+				return words[0]+" "+words[1]
+		return self.content
 	
 	def __unicode__(self):
 		return self.content
 	
 	class Meta:
-		ordering = ['-posted_date']
+		ordering = ['-updated']
 		
 class Comment(models.Model):
 	posted_date = models.DateTimeField(default=datetime.datetime.now)

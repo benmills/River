@@ -1,0 +1,5 @@
+<div id="stream"{% if not project_id %} class='full_width'{% endif %}>
+	{% for s in stream %}
+		{% include "stream/partials/stream_item.html" %}
+	{% endfor %}
+</div>

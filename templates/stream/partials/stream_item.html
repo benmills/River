@@ -1,0 +1,22 @@
+{% load markup %}
+{% load post_filters %}
+{% load post_tags %}
+
+<div class='item{% cycle '' ' odd' %}'>
+	{{s.content|textile|mediaize|safe}}
+	<div class='info'>
+		Posted by {{s.author.get_profile.get_name}} {{s.posted_date|timesince}} ago
+		{% if s.project %}
+			in <a href="{% url project s.project.id %}">{{s.project.title}}</a>
+		{% endif %} | <a href="{% url post s.id %}">View this post</a> | <a href="{% url post s.id %}#comments">{{s.comment_count}}</a>
+		<span class='controls'>
+			{% if board %}<a class='left' href="{% url unpin s.id %}">Unpin</a>{% else %}<a class='left' href="{% url pin s.id %}">Pin to board</a>{% endif %}
+			 {# | <a class='right' href="#">Add to tasks</a> #}
+		</span>
+	</div>
+	{% ifnotequal s.posted_date|date:"d/m/Y/H:i:s" s.updated|date:"d/m/Y/H:i:s"  %}
+	<div class='latest_comment'>
+		{% comment s.last_comment %}
+	</div>
+	{% endifnotequal %}
+</div>

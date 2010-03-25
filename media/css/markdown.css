@@ -37,6 +37,10 @@ sub {
 	padding: 0px 0px 0px 20px;
 }
 
+.item p:first-child, .item p:last-child  {
+	margin: 0px;
+}
+
 .item p {
 	margin: 10px 0px;
 }

@@ -6,4 +6,5 @@ urlpatterns = patterns('',
 	url('^logout/$', logout, {'next_page': '/'}, name='log_out'),
 	url('^register/$', 'userprofile.views.register', name='register'),
 	url('^profile/$', 'userprofile.views.profile', name='user_profile'),
+	url('^board/$', 'userprofile.views.board', name='user_board'),
 )

@@ -36,3 +36,9 @@ def profile(request):
 	return render_to_response('user/profile.html', {
 		'form':form
 	}, context_instance=RequestContext(request))
+	
+@login_required
+def board(request):
+	return render_to_response('user/board.html', {
+		'board':request.user.get_profile().board.all()
+	}, context_instance=RequestContext(request))

@@ -1,51 +1,32 @@
 {% extends "base.html" %}
-
-{% block js %}
-	<script src="/media/js/jquery.autosize.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/media/js/avts.autosize.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/media/js/avts.script.js" type="text/javascript" charset="utf-8"></script>
-{% endblock %}
-
-
-{% block project_name %}| {{project.title}}{% endblock %}
+{% load post_tags %}
 
 {% block content %}
-	<div id="poster">
-		<form method="post">
-			<textarea name="content" class='autosize' id="poster_textarea">Type your message here...</textarea>
-			<div class="controls">
-				<input type="submit" value="Post in" id="Add" />
-				<select name="project">
-					<option value="0">Main Stream</option>
-					{% for p in projects %}
-						<option value="{{p.id}}">{{p.title}}</option>
-					{% endfor %}
-				</select>
-			</div>
-		</form>
-	</div>
-	
-	<div id="stream">
-		{% for s in project.post_set.all %}
-			<div class='item'>
-				{% if s.content %}
-					{{s.content|urlize|textile}}
-					<div class='info'>
-						Posted by {{s.author.get_profile.get_name}} {{s.posted_date|timesince}} ago
-						{% if s.project %}
-							in <a href="{% url project s.project.id %}">{{s.project.title}}</a>
-						{% endif %} | <a href="{% url post s.id %}">View this post</a> | <a href="{% url post s.id %}#comments">{{s.comment_count}}</a>
-						<span class='controls'>
-							<a class='left' href="#">Pin to your board</a><a class='right' href="#">Add to your tasks</a>
-						</span>
-					</div>
-				{% else %}
-					{{s.author.get_profile.get_name}} made a <a href="{% url post s.post.id %}#comments">comment</a> on a post
-					<span class='info'>
-						{{s.posted_date|timesince}} ago
-					</span>
-				{% endif %}
-			</div>
-		{% endfor %}
+	{% poster project.id %}
+	{% post_stream project.id %}
+	<div class="project_info">
+		<span class="description">
+			<h1>{{project.title}}</h1>
+			<p>This is were the project description would go. It would give a short description of what the project is about and some ore stuff that I can't think of right now because its 12:01 and I'm typing too fast. I don't like to use lorum lipsum obviously</p>
+			<p>All I would have to do is alt-tab and type lipsum.com and then I would just copy some text but that wouldn't be nearly as fun</p>
+		</span>
+		
+		<div class='messages list'>
+			<h2>Messages</h2>
+			<ul>
+				{% for p in project.post_set.all %}
+					<li><a href="{% url post p.id %}">{{p.get_title}}</a> <span class='info'>Lasted updated {{p.updated|timesince}}</span></li>
+				{% endfor %}
+			</ul>
+		</div>
+		
+		<div class='files list'>
+			<h2>Files</h2>
+			<ul>
+				<li>Intro-to-git.pdf</li>
+				<li>screenshot.png</li>
+				<li>logo.jpg</li>
+			</ul>
+		</div>
 	</div>
 {% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load post_tags %}
+
+{% block content %}
+	<div id="stream" class="full_width">
+		{% for s in board %}
+			{% include "stream/partials/stream_item.html" %}
+		{% endfor %}
+	</div>
+{% endblock %}
