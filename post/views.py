@@ -35,7 +35,7 @@ def edit_post(request, id):
 		p = Post.objects.get(id=id)
 		p.content = request.POST['content']
 		p.save()
-	return redirect('/post/'+id)
+	return redirect('post', id)
 	
 @user_passes_test(lambda u: u.is_superuser, login_url='/')
 def delete_post(request, object_id):
