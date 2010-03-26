@@ -15,7 +15,7 @@
 			<h2>Messages</h2>
 			<ul>
 				{% for p in project.post_set.all %}
-					<li><a href="{% url post p.id %}">{{p.get_title}}</a> <span class='info'>Lasted updated {{p.updated|timesince}}</span></li>
+					<li><a href="{% url post p.id %}">{{p.title}}</a> <span class='info'>Lasted updated {{p.updated|timesince}}</span></li>
 				{% endfor %}
 			</ul>
 		</div>

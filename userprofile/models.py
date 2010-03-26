@@ -17,3 +17,4 @@ class UserProfile(models.Model):
 class Task(models.Model):
 	user = models.ForeignKey(User)
 	post = models.ForeignKey(Post)
+	is_completed = models.BooleanField(default=False)

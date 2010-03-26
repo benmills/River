@@ -7,21 +7,7 @@ strong {
 sub {
 	font-size: 10px;
 }
-.item h1 {
-	font-size: 24px;
-	margin: 0px 0px 20px 0px;
-	padding: 0px 0px 0px 0px;
-}
-.item h2 {
-	font-size: 21px;
-	margin: 0px 0px 15px 0px;
-	padding: 0px 0px 0px 0px;
-}
-.item h3 {
-	font-size: 18px;
-	margin: 0px 0px 10px 0px;
-	padding: 0px 0px 0px 0px;
-}
+
 .item p {
 	margin: 0px 0px 0px 0px;
 	padding: 0px 0px 0px 0px;

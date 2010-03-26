@@ -17,7 +17,7 @@
 		<div id="user_info">
 			Welcome back {{user.get_profile.get_name}}
 			<p class='controls'>
-				<a href="{% url log_out %}">Logout</a> | <a href="{% url user_profile %}">Profile</a> | <a href="{% url user_board %}">Board</a>
+				<a href="{% url log_out %}">Logout</a> | <a href="{% url user_profile %}">Profile</a> | <a href="{% url user_board %}">Board</a> | <a href="{% url user_tasks %}">Tasks</a>
 			</p>
 		</div>
 		{% block header %}

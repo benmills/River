@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load post_tags %}
+{% load post_filters %}
+{% load markup %}
+
+{% block content %}
+	<div id="stream" class="full_width">
+		{% for t in tasks %}
+		<div class='item'>
+			<h1 class="title">{{t.post.title}}</h1>
+			{{t.post.content|textile|mediaize|safe}}
+			<div class='info'>
+				Posted by {{t.post.author.get_profile.get_name}} {{t.post.posted_date|timesince}} ago
+				{% if s.project %}
+					in <a href="{% url project s.project.id %}">{{t.post.project.title}}</a>
+				{% endif %} | <a href="{% url post t.post.id %}">View this post</a> | <a href="{% url post t.post.id %}#comments">{{t.post.comment_count}}</a>
+				<span class='controls'>
+					{% if board %}<a class='left' href="{% url unpin s.id %}">Unpin</a>{% else %}<a class='left' href="{% url pin t.post.id %}">Pin to board</a>{% endif %}
+					 {# | <a class='right' href="#">Add to tasks</a> #}
+				</span>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+{% endblock %}

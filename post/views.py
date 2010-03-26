@@ -2,9 +2,10 @@ from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponse
-from django.views.generic.create_update import *
+from django.views.generic.create_update import delete_object
 
 from post.models import *
+from userprofile.models import *
 from project.models import *
 from post.forms import *
 
@@ -35,7 +36,7 @@ def edit_post(request, id):
 		p = Post.objects.get(id=id)
 		p.content = request.POST['content']
 		p.save()
-	return redirect('post', id)
+	return redirect('/post/'+id)
 	
 @user_passes_test(lambda u: u.is_superuser, login_url='/')
 def delete_post(request, object_id):
@@ -52,7 +53,14 @@ def pin(request, id):
 def unpin(request, id):
 	#Post.objects.get(id=id)
 	request.user.get_profile().board.remove(id)
-	return redirect('/user/board')	
+	return redirect('/user/board')
+	
+@login_required
+def add_task(request, id):
+	p = Post.objects.get(id=id)
+	Task(post=p, user=request.user).save()
+	return redirect('/')
+	
 
 @login_required
 def post(request, id):

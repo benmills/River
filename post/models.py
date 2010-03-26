@@ -8,6 +8,7 @@ class Post(models.Model):
 	posted_date = models.DateTimeField(default=datetime.datetime.now)
 	updated = models.DateTimeField(auto_now=True)
 	content = models.TextField()
+	title = models.TextField()
 	author = models.ForeignKey(User, related_name="posts")
 	assigned = models.ManyToManyField(User, related_name="assigned_tasks")
 	project = models.ForeignKey(Project, null=True)
@@ -23,16 +24,6 @@ class Post(models.Model):
 		if len(comments) > 0:
 			return comments[0]
 		else: return None
-		
-	def get_title(self):
-		lines = self.content.split('\n')
-		for l in lines:
-			words = l.split(' ')
-			if len(words) >= 2:
-				if words[0] == 'h1.':
-					return words[1]
-				return words[0]+" "+words[1]
-		return self.content
 	
 	def __unicode__(self):
 		return self.content

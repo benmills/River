@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render_to_response, redirect
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.template import RequestContext
 from django.contrib.auth import login as auth_login, authenticate
 from django.http import HttpResponse
@@ -43,11 +43,19 @@ def board(request):
 		'board':request.user.get_profile().board.all()
 	}, context_instance=RequestContext(request))
 	
+@login_required
+def tasks(request):
+	return render_to_response('user/tasks.html', {
+		'tasks':request.user.task_set.all()
+	}, context_instance=RequestContext(request))
+
+@user_passes_test(lambda u: u.is_superuser, login_url='/')	
 def user_admin(request):
 	return render_to_response('admin/users.html', {
 		'users':User.objects.all()
 	}, context_instance=RequestContext(request))
-	
+
+@user_passes_test(lambda u: u.is_superuser, login_url='/')
 def user_admin_edit(request, id):
 	user = User.objects.get(id=id)
 	if request.method == "POST":

@@ -70,17 +70,26 @@ a:hover {
 	
 /* Poster */
 
-#poster {
+.inputs {
+	background: #FFF;
+	width: 1030px;
+	padding: 10px;
 }
+	#poster_title {
+		padding: 0px 0px 0px 0px; margin: 0px -2px 13px 0px;
+		border: none;
+		font-size: 24px;
+		display: none;
+	}
 	#poster textarea {
 		font-family: 'Trebuchet MS', Helvetica;
-		margin: -3px 0px 0px 0px; padding: 10px;
+		margin: -3px 0px 0px 0px; 
 		border: none;
 		width: 1030px;
 		font-size: 18px;
 		height: 20px;
-		-webkit-box-shadow: #dddddd 0px 0px 8px;
-		-moz-box-shadow: #dddddd 0px 0px 8px;
+/*		-webkit-box-shadow: #dddddd 0px 0px 8px;
+		-moz-box-shadow: #dddddd 0px 0px 8px;*/
 	}
 	#poster .controls {
 		padding: 3px 0px;
@@ -132,6 +141,10 @@ a:hover {
 		border-bottom: 1px solid #eff0f0;
 		line-height: 20px;
 	}
+		#stream h1.title {
+			margin: 0px 0px 20px 0px;
+			font-size: 24px;
+		}
 		#stream .item.odd {
 			background: #fbfbfc;
 		}
@@ -173,6 +186,10 @@ a:hover {
 	width: 1024px;
 	height: 350px;
 	font-size: 15px;
+}
+.edit_form input.text {
+	width: 1024px;
+	font-size: 24px;
 }
 				
 /* Post Info */

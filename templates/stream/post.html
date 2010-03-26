@@ -27,9 +27,14 @@
 		</div>
 		
 		<div class='item'>
-			<span class='post_text'>{{post.content|urlize|textile}}</span>
+			
+			<span class='post_text'>
+				<h1 class='title'>{{post.title}}</h1>
+				{{post.content|urlize|textile}}
+			</span>
 			{% ifequal user post.author  %}
 				<form class="edit_form" method="post" action="{% url edit_post post.id %}">
+					<input name='title' class='text' value="{{post.title}}">
 					<textarea name='content'>{{post.content}}</textarea>
 					<input type="submit" value="Save Changes"> <a href="#" class="cancel_edit">Nevermind</a>
 				</form>

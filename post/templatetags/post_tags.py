@@ -6,6 +6,12 @@ from project.models import *
 
 register = template.Library()	
 
+@register.inclusion_tag('stream/partials/stream_item.html')
+def post(item):
+	return {
+		's': item
+	}
+
 @register.inclusion_tag('stream/partials/stream.html')
 def post_stream(project_id=None):
 	return {
