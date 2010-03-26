@@ -73,6 +73,7 @@ a:hover {
 #poster {
 }
 	#poster textarea {
+		font-family: 'Trebuchet MS', Helvetica;
 		margin: -3px 0px 0px 0px; padding: 10px;
 		border: none;
 		width: 1030px;
@@ -99,10 +100,12 @@ a:hover {
 		form.edit label {
 			display: inline-block;
 			width: 20%;
+			font-size: 18px;
 		}
 		form.edit p {
 			margin: 0px 0px 8px 0px; padding: 0px 0px 8px 0px;
 			border-bottom: 1px dashed #EEE;
+			font-size: 10px;
 		}
 		form.edit p input, form.edit p textarea {
 			width: 79%;
@@ -116,8 +119,7 @@ a:hover {
 	margin: 10px 0px 0px 0px;
 	background: #FFF;
 	float: left;
-	width: auto;
-	min-width: 630px;
+	width: 630px;
 	-webkit-box-shadow: #dddddd 0px 0px 8px;
 	-moz-box-shadow: #dddddd 0px 0px 8px;
 }
@@ -294,6 +296,15 @@ form.add_comment {
 		.project_info .list:last-child {
 			margin: 0px 0px 0px 0px;
 		}
+		
+/* List */
+.list {
+	padding: 10px;
+}
+	.list h1 {
+		font-size: 30px;
+		margin: 0px 0px 10px 0px;
+	}
 
 /* Skeleton */
 #skel_box {

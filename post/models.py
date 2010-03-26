@@ -21,7 +21,7 @@ class Post(models.Model):
 	def last_comment(self):
 		comments = self.comment_set.all()
 		if len(comments) > 0:
-			return comments[len(comments)-1]
+			return comments[0]
 		else: return None
 		
 	def get_title(self):

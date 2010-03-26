@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load post_tags %}
+
+{% block content %}
+<div class='list'>
+	<h1>Users</h1>
+	{% for u in users %}
+			<div class='item'>
+				{{u.get_profile.get_name}} <a href="{% url user_admin_edit u.id %}">edit</a>
+			</div>
+	{% endfor %}
+</div>
+{% endblock %}

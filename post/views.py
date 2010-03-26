@@ -1,7 +1,8 @@
 from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.template import RequestContext
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponse
+from django.views.generic.create_update import *
 
 from post.models import *
 from project.models import *
@@ -35,6 +36,10 @@ def edit_post(request, id):
 		p.content = request.POST['content']
 		p.save()
 	return redirect('/post/'+id)
+	
+@user_passes_test(lambda u: u.is_superuser, login_url='/')
+def delete_post(request, object_id):
+    return delete_object(request, Post, '/', object_id=object_id, template_name='admin/delete_confirm.html')
 	
 @login_required
 def pin(request, id):

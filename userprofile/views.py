@@ -42,3 +42,22 @@ def board(request):
 	return render_to_response('user/board.html', {
 		'board':request.user.get_profile().board.all()
 	}, context_instance=RequestContext(request))
+	
+def user_admin(request):
+	return render_to_response('admin/users.html', {
+		'users':User.objects.all()
+	}, context_instance=RequestContext(request))
+	
+def user_admin_edit(request, id):
+	user = User.objects.get(id=id)
+	if request.method == "POST":
+		form = UserFormAdmin(request.POST, instance=user)
+		if form.is_valid():
+			form.save()
+	else:
+		form = UserFormAdmin(instance=user)
+		
+	return render_to_response('admin/user.html', {
+		'edit_user': user,
+		'form':form,
+	}, context_instance=RequestContext(request))

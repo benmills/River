@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load post_tags %}
+
+{% block content %}
+<div class='list'>
+	<h1>Editing: {{edit_user.get_profile.get_name}}</h1>
+	<form method="post" class='edit' action=".">
+		{{form.as_p}}
+		<input type="submit" value="Save User">
+	</form>
+</div>
+{% endblock %}

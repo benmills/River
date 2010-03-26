@@ -18,9 +18,12 @@
 			{% if post.project %}
 			<div class='info'><strong>Project:</strong> <a href="{% url project post.project.id %}">{{post.project.title}}</a></div>
 			{% endif %}
-			{% ifequal user post.author  %}
+			{% ifequal user post.author %}
 			<div class='info'><strong>Controls:</strong> <a href="#" class='show_edit_form'>Edit</a></div>
 			{% endifequal %}
+			{% if user.is_superuser %}
+				<div class='info'><strong>Admin:</strong> <a href="{% url delete_post post.id %}">Delete</a></div>
+			{% endif %}
 		</div>
 		
 		<div class='item'>
