@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load markup %}
 {% load post_tags %}
+{% load post_filters %}
 
 {% block js %}
 	<script src="/media/js/avts.edit.js" type="text/javascript" charset="utf-8"></script>
@@ -10,9 +11,11 @@
 	<div id="stream" class="full_width">
 		
 		<div class='post_info'>
+			
 			<span class='controls'>
-				<a class='left' href="#">Pin to your board</a><a class='right' href="#">Add to your tasks</a>
+				{% if user|ispined:post %}<a class='left' href="{% url unpin post.id %}?next={% url post post.id %}">Unpin</a>{% else %}<a class='left' href="{% url pin post.id %}?next={% url post post.id %}">Pin to board</a>{% endif %}{% if user|istask:post %}<a class='right' href="{% url remove_task post.id %}?next={% url post post.id %}">Remove from tasks</a>{% else %}<a class='right' href="{% url add_task post.id %}?next={% url post post.id %}">Add to tasks</a>{% endif %}
 			</span>
+			
 			<div class='info'><strong>Author:</strong> {{post.author.get_profile.get_name}}</div>
 			<div class='info'><strong>Date:</strong> {{post.posted_date|date:"D d, M Y"}}</div>
 			{% if post.project %}

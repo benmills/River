@@ -1,4 +1,13 @@
 <div id="stream"{% if not project_id %} class='full_width'{% endif %}>
+	{% if notifications %}		
+		<div id="notifications">
+			{{notifications|length}} New Posts:
+			{% for n in notifications %}
+				<a href="{% url post n.id %}">{{n.title}}</a>{% if not forloop.last %}, {% endif %}
+			{% endfor %}
+		</div>
+	{% endif %}
+	
 	<span class='items'>
 	{% for s in stream %}
 		{% include "stream/partials/stream_item.html" %}

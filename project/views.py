@@ -27,4 +27,5 @@ def project_stream(request, project_id):
 		
 	return render_to_response("stream/project.html", {
 		'project':Project.objects.get(id=project_id),
+		'request':request,
 	}, context_instance=RequestContext(request))

@@ -3,7 +3,19 @@ from django.core.urlresolvers import reverse
 from django.template.defaultfilters import urlize
 import re
 
+from userprofile.models import Task
+
 register = template.Library()	
+
+@register.filter
+def ispined(user, post):
+	if user.get_profile().board.filter(id=post.id): return True
+	else: return False
+		
+@register.filter
+def istask(user, post):
+	if Task.objects.filter(post=post, user=user): return True
+	else: return False
 
 @register.filter
 def mediaize(obj):

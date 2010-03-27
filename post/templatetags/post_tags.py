@@ -13,8 +13,10 @@ def post(item):
 	}
 
 @register.inclusion_tag('stream/partials/stream.html')
-def post_stream(project_id=None):
+def post_stream(user, project_id=None):
 	return {
+		'user': user,
+		'notifications': user.get_profile().get_notifications(),
 		'stream': Post.objects.all() if project_id == None else Project.objects.get(id=project_id).post_set.all(),
 		'project_id': project_id,
 	}

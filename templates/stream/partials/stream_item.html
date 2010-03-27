@@ -4,15 +4,15 @@
 
 <div class='item{% cycle '' ' odd' %}'>
 	<h1 class="title">{{s.title}}</h1>
-	{{s.content|textile|mediaize|safe}}
+	{{s.content|urlize|textile}}
 	<div class='info'>
 		Posted by {{s.author.get_profile.get_name}} {{s.posted_date|timesince}} ago
 		{% if s.project %}
 			in <a href="{% url project s.project.id %}">{{s.project.title}}</a>
 		{% endif %} | <a href="{% url post s.id %}">View this post</a> | <a href="{% url post s.id %}#comments">{{s.comment_count}}</a>
 		<span class='controls'>
-			{% if board %}<a class='left' href="{% url unpin s.id %}">Unpin</a>{% else %}<a class='left' href="{% url pin s.id %}">Pin to board</a>{% endif %}
-			 | <a class='right' href="{% url add_task s.id %}">Add to tasks</a>
+			{% if user|ispined:s %}<a class='left' href="{% url unpin s.id %}?next={{request.path}}">Unpin</a>{% else %}<a class='left' href="{% url pin s.id %}?next={{request.path}}">Pin to board</a>{% endif %}
+			 | {% if user|istask:s %}<a class='right' href="{% url remove_task s.id %}?next={{request.path}}">Remove from tasks</a>{% else %}<a class='right' href="{% url add_task s.id %}?next={{request.path}}">Add to tasks</a>{% endif %}
 		</span>
 	</div>
 	{% ifnotequal s.posted_date|date:"d/m/Y/H:i:s" s.updated|date:"d/m/Y/H:i:s"  %}

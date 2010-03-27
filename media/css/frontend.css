@@ -120,7 +120,16 @@ a:hover {
 			width: 79%;
 			font-size: 18px;
 		}
-	
+
+/* Notifications */
+#notifications {
+	padding: 10px;
+	background: #fbf2d1;
+}
+#messages {
+	padding: 10px; margin: 0px 0px 10px 0px;
+	background: #fbf2d1;
+}
 	
 /* Stream */
 

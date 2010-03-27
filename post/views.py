@@ -19,23 +19,31 @@ def add_post(request):
 			p.author_id = request.user.id;
 			p.project_id = request.POST['project']
 			p.save()
+			request.user.message_set.create(message="Posted Added!")
+			
+			# Notify the right people 
+			for u in UserProfile.objects.filter(last_active__lt=(p.posted_date - timedelta(minutes=3))):
+				u.notifications.add(p)
 			
 # Views
 		
 @login_required
 def main_stream(request):
 	add_post(request)
-	
 	return render_to_response("stream/main.html", {
 		'projects':Project.objects.all(),
+		'request':request,
 	}, context_instance=RequestContext(request))
 
 @login_required
 def edit_post(request, id):
-	if request.method == 'POST' and request.POST['content']:
+	if request.method == 'POST' and request.POST['content'] and request.POST['title']:
 		p = Post.objects.get(id=id)
-		p.content = request.POST['content']
-		p.save()
+		if request.user == p.author:
+			p.content = request.POST['content']
+			p.title = request.POST['title']
+			p.save()
+			request.user.message_set.create(message="Posted Edited!")
 	return redirect('/post/'+id)
 	
 @user_passes_test(lambda u: u.is_superuser, login_url='/')
@@ -46,20 +54,37 @@ def delete_post(request, object_id):
 def pin(request, id):
 	try:
 		request.user.get_profile().board.add(id)
+		request.user.message_set.create(message="Post Pined!")
 	except: pass
-	return redirect('/')
+	return redirect('/') if not request.GET.__contains__('next') else redirect(request.GET['next'])
 	
 @login_required
 def unpin(request, id):
-	#Post.objects.get(id=id)
 	request.user.get_profile().board.remove(id)
-	return redirect('/user/board')
+	request.user.message_set.create(message="Posted Unpined!")
+	return redirect('/user/board') if not request.GET.__contains__('next') else redirect(request.GET['next'])
 	
 @login_required
 def add_task(request, id):
 	p = Post.objects.get(id=id)
 	Task(post=p, user=request.user).save()
-	return redirect('/')
+	request.user.message_set.create(message="Task Added!")
+	return redirect('/') if not request.GET.__contains__('next') else redirect(request.GET['next'])
+	
+@login_required
+def remove_task(request, id):
+	Task.objects.get(post=Post.objects.get(id=id), user=request.user).delete()
+	request.user.message_set.create(message="Task Removed!")
+	return redirect('/') if not request.GET.__contains__('next') else redirect(request.GET['next'])
+	
+@login_required
+def complete_task(request, id):
+	t = Task.objects.get(id=id)
+	if t.is_completed: t.is_completed = False
+	else: t.is_completed = True
+	t.save()
+	request.user.message_set.create(message="Task Completed!")
+	return redirect('user_tasks') if not request.GET.__contains__('next') else redirect(request.GET['next'])
 	
 
 @login_required
@@ -71,5 +96,6 @@ def post(request, id):
 		post.save()
 		
 	return render_to_response("stream/post.html", {
-		'post':post
+		'post':post,
+		'request':request,
 	}, context_instance=RequestContext(request))

@@ -62,6 +62,7 @@ MIDDLEWARE_CLASSES = (
 	'django.middleware.common.CommonMiddleware',
 	'django.contrib.sessions.middleware.SessionMiddleware',
 	'django.contrib.auth.middleware.AuthenticationMiddleware',
+	'userprofile.middleware.UserProfileMiddleware',
 )
 
 ROOT_URLCONF = 'river.urls'

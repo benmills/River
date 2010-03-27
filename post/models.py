@@ -22,7 +22,7 @@ class Post(models.Model):
 	def last_comment(self):
 		comments = self.comment_set.all()
 		if len(comments) > 0:
-			return comments[0]
+			return self.comment_set.latest('posted_date')
 		else: return None
 	
 	def __unicode__(self):
@@ -36,6 +36,9 @@ class Comment(models.Model):
 	post = models.ForeignKey(Post)
 	comment = models.TextField()
 	author = models.ForeignKey(User)
+	
+	class Meta:
+		ordering = ['-posted_date']
 	
 class TodoItem(models.Model):
 	posted_date = models.DateTimeField(default=datetime.datetime.now)

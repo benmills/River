@@ -26,9 +26,8 @@ def profile(request):
 		form = UserForm(request.POST, instance=request.user)
 		if form.is_valid():
 			u = form.save()
-			try: u.get_profile()
-			except:
-				UserProfile(user=u).save()
+			u.get_profile()
+			u.message_set.create(message="Profile Updated!")
 			return redirect('/')
 	else:
 		form = UserForm(instance=request.user)
@@ -40,14 +39,20 @@ def profile(request):
 @login_required
 def board(request):
 	return render_to_response('user/board.html', {
-		'board':request.user.get_profile().board.all()
+		'board':request.user.get_profile().board.all(),
+		'request':request,
 	}, context_instance=RequestContext(request))
 	
 @login_required
 def tasks(request):
 	return render_to_response('user/tasks.html', {
-		'tasks':request.user.task_set.all()
+		'tasks':request.user.task_set.all(),
+		'request':request,
 	}, context_instance=RequestContext(request))
+	
+# @login_required
+# def clear_notifications(request):
+# 	request.user.get_profile()
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/')	
 def user_admin(request):
