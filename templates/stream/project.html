@@ -3,7 +3,7 @@
 
 {% block content %}
 	{% poster project.id %}
-	{% post_stream project.id %}
+	{% post_stream request project.id %}
 	<div class="project_info">
 		<span class="description">
 			<h1>{{project.title}}</h1>

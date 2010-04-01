@@ -5,11 +5,22 @@
 <div class='item{% cycle '' ' odd' %}'>
 	<h1 class="title">{{s.title}}</h1>
 	{{s.content|urlize|textile}}
+	<div class="files">
+		{% for f in s.postfile_set.all %}
+			<a href="/media/{{f.file}}" target="_blank">{{f.get_name}}</a>
+		{% endfor %}
+	</div>
 	<div class='info'>
 		Posted by {{s.author.get_profile.get_name}} {{s.posted_date|timesince}} ago
 		{% if s.project %}
 			in <a href="{% url project s.project.id %}">{{s.project.title}}</a>
 		{% endif %} | <a href="{% url post s.id %}">View this post</a> | <a href="{% url post s.id %}#comments">{{s.comment_count}}</a>
+		{% if s.assigned.all %}
+			Assigned to {% for u in s.assigned.all %}{{u.get_profile.get_name}}{% endfor %}
+		{% endif %}
+		{% if s.is_completed %}
+			| Completed
+		{% endif %}
 		<span class='controls'>
 			{% if user|ispined:s %}<a class='left' href="{% url unpin s.id %}?next={{request.path}}">Unpin</a>{% else %}<a class='left' href="{% url pin s.id %}?next={{request.path}}">Pin to board</a>{% endif %}
 			 | {% if user|istask:s %}<a class='right' href="{% url remove_task s.id %}?next={{request.path}}">Remove from tasks</a>{% else %}<a class='right' href="{% url add_task s.id %}?next={{request.path}}">Add to tasks</a>{% endif %}

@@ -7,6 +7,9 @@
 	<div id="stream" class="full_width">
 		{% for t in tasks %}
 		<div class='item'>
+			{% if t.assigned_by %}
+				<div class='info_header'>Assigned By {{t.assigned_by.get_profile.get_name}}</div>
+			{% endif %}
 			<h1 class="title">{{t.post.title}}</h1>
 			{{t.post.content|textile|mediaize|safe}}
 			<div class='info'>

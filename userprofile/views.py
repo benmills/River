@@ -4,6 +4,8 @@ from django.template import RequestContext
 from django.contrib.auth import login as auth_login, authenticate
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+from itertools import chain
+
 from userprofile.models import *
 from userprofile.forms import *
 

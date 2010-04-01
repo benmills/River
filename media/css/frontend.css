@@ -1,5 +1,5 @@
 body {
-	background: #eff0f0;
+	background: #eff0f0 url('/media/imgs/background.png') no-repeat center top;
 	color: #4b4b4b;
 	font-family: 'Trebuchet MS', Helvetica;
 }
@@ -18,7 +18,7 @@ a:hover {
 
 #header {
 	margin: 0px 0px 20px 0px;
-	background: #104878;
+	background: #104878 url('/media/imgs/header-bg.png');
 }
 	#header .project {
 		margin: -5px 0px 0px 30px;
@@ -74,6 +74,8 @@ a:hover {
 	background: #FFF;
 	width: 1030px;
 	padding: 10px;
+	-webkit-box-shadow: #dddddd 0px 0px 8px;
+	-moz-box-shadow: #dddddd 0px 0px 8px;
 }
 	#poster_title {
 		padding: 0px 0px 0px 0px; margin: 0px -2px 13px 0px;
@@ -88,8 +90,6 @@ a:hover {
 		width: 1030px;
 		font-size: 18px;
 		height: 20px;
-/*		-webkit-box-shadow: #dddddd 0px 0px 8px;
-		-moz-box-shadow: #dddddd 0px 0px 8px;*/
 	}
 	#poster .controls {
 		padding: 3px 0px;
@@ -122,6 +122,7 @@ a:hover {
 		}
 
 /* Notifications */
+
 #notifications {
 	padding: 10px;
 	background: #fbf2d1;
@@ -150,6 +151,11 @@ a:hover {
 		border-bottom: 1px solid #eff0f0;
 		line-height: 20px;
 	}
+		#stream .info_header {
+			padding: 5px 10px; margin: -15px -10px 10px -10px;
+			background: #e0ebf9;
+			color: #5a85ba;
+		}
 		#stream h1.title {
 			margin: 0px 0px 20px 0px;
 			font-size: 24px;

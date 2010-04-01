@@ -30,3 +30,4 @@ class Task(models.Model):
 	user = models.ForeignKey(User)
 	post = models.ForeignKey(Post)
 	is_completed = models.BooleanField(default=False)
+	assigned_by = models.ForeignKey(User, related_name="assigned_to_tasks", null=True)

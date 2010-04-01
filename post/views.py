@@ -19,11 +19,23 @@ def add_post(request):
 			p.author_id = request.user.id;
 			p.project_id = request.POST['project']
 			p.save()
+			p.assigned = form.cleaned_data['assigned']
+			p.save()
+			
+			for u in form.cleaned_data['assigned']:
+				Task(post=p, user=u, assigned_by=request.user).save()
+			
+			# Save files
+			files = PostFileFormSet(request.POST, request.FILES, instance=p, prefix='files')
+			files.save()
+			
 			request.user.message_set.create(message="Posted Added!")
 			
 			# Notify the right people 
 			for u in UserProfile.objects.filter(last_active__lt=(p.posted_date - timedelta(minutes=3))):
 				u.notifications.add(p)
+		else:
+			raise Exception
 			
 # Views
 		
@@ -80,8 +92,16 @@ def remove_task(request, id):
 @login_required
 def complete_task(request, id):
 	t = Task.objects.get(id=id)
-	if t.is_completed: t.is_completed = False
-	else: t.is_completed = True
+	if t.is_completed: 
+		t.is_completed = False
+		if t.assigned_by:
+			t.post.is_completed = False
+			t.post.save()
+	else: 
+		t.is_completed = True
+		if t.assigned_by:
+			t.post.is_completed = True
+			t.post.save()
 	t.save()
 	request.user.message_set.create(message="Task Completed!")
 	return redirect('user_tasks') if not request.GET.__contains__('next') else redirect(request.GET['next'])

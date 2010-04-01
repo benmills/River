@@ -4,6 +4,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 LOCAL_DEVELOPMENT = True
 PATH = '/sites/river/'
+INTERNAL_IPS = ('127.0.0.1',)
 
 DATABASE_ENGINE = 'sqlite3'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
 DATABASE_NAME = PATH+'data.db'             # Or path to database file if using sqlite3.
@@ -77,6 +78,7 @@ INSTALLED_APPS = (
 	'post',
 	'project',
 	'userprofile',
+	'django_extensions',
 )
 
 # Authentication

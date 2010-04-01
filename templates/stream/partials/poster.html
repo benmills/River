@@ -1,8 +1,22 @@
 <div id="poster">
-	<form method="post" id="main_poster">
+	<form method="post" id="main_poster" enctype="multipart/form-data">
+		{{formset.management_form}}
 		<div class="inputs">
 			<input name="title" id="poster_title">
 			<textarea name="content" class='autosize' id="poster_textarea">Type your message here...</textarea>
+		</div>
+		<div class="assigner">
+			<select multiple="multiple" name="assigned" id="id_assigned">
+				{% for u in users %}
+					<option value="{{u.id}}">{{u.get_profile.get_name}}</option>
+				{% endfor %}
+			</select>
+		</div>
+		<div class="attachemnts">
+			{{assignset.as_p}}
+			{% for form in formset.forms %}
+				{{form.as_p}}
+			{% endfor %}
 		</div>
 		<div class="controls">
 			<input type="submit" value="Post in" id="Add" />

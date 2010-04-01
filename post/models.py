@@ -10,7 +10,11 @@ class Post(models.Model):
 	content = models.TextField()
 	title = models.TextField()
 	author = models.ForeignKey(User, related_name="posts")
-	assigned = models.ManyToManyField(User, related_name="assigned_tasks")
+	assigned = models.ManyToManyField(User, related_name="assigned_tasks", null=True)
+	
+	is_completed = models.BooleanField(default=False)
+	completed_by = models.ForeignKey(User, related_name="completed_posts", null=True)
+	
 	project = models.ForeignKey(Project, null=True)
 	
 	def comment_count(self):
@@ -59,8 +63,10 @@ class PostFile(models.Model):
 	post = models.ForeignKey(Post)
 	file = models.FileField(upload_to='post-files/%Y/%m/%d')
 	
-	def __unicode__(self):
-		return self.file
+	def get_name(self):
+		name = str(self.file).split('/')
+		name.reverse()
+		return name[0]
 	
 	class Meta:
 		ordering = ['-posted_date']

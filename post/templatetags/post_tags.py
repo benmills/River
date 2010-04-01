@@ -1,7 +1,9 @@
 from django import template
+from django.contrib.auth.models import User
 from itertools import chain
 
 from post.models import *
+from post.forms import *
 from project.models import *
 
 register = template.Library()	
@@ -13,10 +15,11 @@ def post(item):
 	}
 
 @register.inclusion_tag('stream/partials/stream.html')
-def post_stream(user, project_id=None):
+def post_stream(request, project_id=None):
 	return {
-		'user': user,
-		'notifications': user.get_profile().get_notifications(),
+		'user': request.user,
+		'request': request,
+		'notifications': request.user.get_profile().get_notifications(),
 		'stream': Post.objects.all() if project_id == None else Project.objects.get(id=project_id).post_set.all(),
 		'project_id': project_id,
 	}
@@ -24,6 +27,9 @@ def post_stream(user, project_id=None):
 @register.inclusion_tag('stream/partials/poster.html')
 def poster(project_id=None):
 	return {
+		'formset': PostFileFormSet(prefix='files'),
+		'form': PostForm(),
+		'users': User.objects.all(),
 		'projects': Project.objects.all(),
 		'project_id':project_id,
 	}	
