@@ -1,3 +1,28 @@
+<script src="/media/js/avts.clonemore.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+	$(function(){
+		var attachments_hidden = true;
+		
+		$("select#id_assigned").hide();
+		$('div.attachemnts').hide();
+		
+		$("a.assign_poster").click(function(e){
+			e.preventDefault();
+			$("select#id_assigned").show();
+		});
+		
+		$('a.add_poster_file').click(function(e){
+			$('div.attachemnts').show();
+			e.preventDefault();
+			if (attachments_hidden) {
+				attachments_hidden = false;
+				return;
+			}
+			cloneMore('div.attachemnts p:last', 'files');
+		});
+	});
+</script>
+
 <div id="poster">
 	<form method="post" id="main_poster" enctype="multipart/form-data">
 		{{formset.management_form}}
@@ -30,6 +55,8 @@
 					{% endifequal %}
 				{% endfor %}
 			</select>
+			| 
+			<a href="#" class="add_poster_file">Attach File</a> | <a href="#" class="assign_poster">Assign</a>
 		</div>
 	</form>
 </div>
