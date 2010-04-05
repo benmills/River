@@ -1,0 +1,10 @@
+River
+
+To Install:
+
+1) Change 'PATH' in settings.py to a full path to your river installation (i.e. "/Users/benmills/sites/river/")
+2) You most likely will want to reset the database, to do this delete data.db (rm data.db) then resysnc the db by typing `python manage.py syncdb` in terminal (you must be in the root of your river installation). 
+	Note: Make sure you create a superuser when you sync the db it will ask you to create one, just type yes
+3) You might need a few python libraries to get the installation working correctly here are the required ones:
+	a. Textile: `sudo easy_install textile`
+	b. django-extentions
