@@ -17,6 +17,9 @@ class Post(models.Model):
 	
 	project = models.ForeignKey(Project, null=True)
 	
+	has_files = models.BooleanField(default=False)
+	has_todos = models.BooleanField(default=False)
+	
 	def comment_count(self):
 		count = self.comment_set.count()
 		if count == 0: return "No Comments"
@@ -49,8 +52,8 @@ class TodoItem(models.Model):
 	post = models.ForeignKey(Post)
 	content = models.TextField()
 	is_completed = models.BooleanField()
-	completed_by = models.ForeignKey(User)
-	completed_date = models.DateField(default=datetime.datetime.now)
+	completed_by = models.ForeignKey(User, null=True)
+	completed_date = models.DateTimeField(default=datetime.datetime.now)
 	
 	def __unicode__(self):
 		return self.content
@@ -70,3 +73,11 @@ class PostFile(models.Model):
 	
 	class Meta:
 		ordering = ['-posted_date']
+		
+class Filter(models.Model):
+	owner = models.ForeignKey(User, related_name="filters")
+	author_id = models.IntegerField(default=0)
+	assigned_id = models.IntegerField(default=0)
+	project_id= models.IntegerField(default=0)
+	type = models.IntegerField(default=0)
+	

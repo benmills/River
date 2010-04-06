@@ -85,3 +85,13 @@ INSTALLED_APPS = (
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/user/login'
 AUTH_PROFILE_MODULE = 'userprofile.UserProfile'
+
+#Email Testing: python -m smtpd -n -c DebuggingServer localhost:1025
+ACCOUNT_ACTIVATION_DAYS = 2
+
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
+DEFAULT_FROM_EMAIL = 'testing@example.com'

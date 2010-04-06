@@ -16,18 +16,38 @@ def post(item):
 
 @register.inclusion_tag('stream/partials/stream.html')
 def post_stream(request, project_id=None):
+	try: user_filter = request.user.filters.all()[0]
+	except: 
+		Filter(owner=request.user).save()
+		user_filter = request.user.filters.all()[0]
+		
+	args = dict()
+	find_posts = Post.objects.filter
+	
+	if user_filter.author_id: args['author'] = user_filter.author_id
+	if user_filter.project_id: args['project'] = user_filter.project_id
+	if user_filter.assigned_id: find_posts = User.objects.get(id=user_filter.assigned_id).assigned_tasks.filter
+	if user_filter.type:
+		if user_filter.type == 1:
+			args['has_todos'] = True
+		elif user_filter.type == 2:
+			args['has_files'] = True
+	
+	stream = find_posts(**args) if project_id == None else Project.objects.get(id=project_id).post_set.all()
+	
 	return {
 		'user': request.user,
 		'request': request,
 		'notifications': request.user.get_profile().get_notifications(),
-		'stream': Post.objects.all() if project_id == None else Project.objects.get(id=project_id).post_set.all(),
+		'stream': stream,
 		'project_id': project_id,
 	}
 	
 @register.inclusion_tag('stream/partials/poster.html')
 def poster(project_id=None):
 	return {
-		'formset': PostFileFormSet(prefix='files'),
+		'file_formset': PostFileFormSet(prefix='files'),
+		'todo_formset': TodoFormSet(prefix='todos'),
 		'form': PostForm(),
 		'users': User.objects.all(),
 		'projects': Project.objects.all(),

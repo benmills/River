@@ -2,9 +2,11 @@
 <script type="text/javascript" charset="utf-8">
 	$(function(){
 		var attachments_hidden = true;
+		var todos_hidden = true;
 		
 		$("select#id_assigned").hide();
 		$('div.attachemnts').hide();
+		$('div.todos').hide();
 		
 		$("a.assign_poster").click(function(e){
 			e.preventDefault();
@@ -12,20 +14,37 @@
 		});
 		
 		$('a.add_poster_file').click(function(e){
-			$('div.attachemnts').show();
 			e.preventDefault();
 			if (attachments_hidden) {
+				$('div.attachemnts').show();
 				attachments_hidden = false;
 				return;
 			}
 			cloneMore('div.attachemnts p:last', 'files');
+		});
+		
+		$('a.add_poster_todo').click(function(e){
+			e.preventDefault();
+			if (todos_hidden) {
+				$('div.todos').show();
+				todos_hidden = false;
+				return;
+			}
+			cloneMore('div.todos p:last', 'todos');
+		});
+		
+		$('a.delete_soft_item').click(function(e){
+			e.preventDefault();
+			// Make sure we don't delete the last one
+			if ($(this).parent('p').parent('div').children('p').length > 1) $(this).parent('p').remove();
 		});
 	});
 </script>
 
 <div id="poster">
 	<form method="post" id="main_poster" enctype="multipart/form-data">
-		{{formset.management_form}}
+		{{file_formset.management_form}}
+		{{todo_formset.management_form}}
 		<div class="inputs">
 			<input name="title" id="poster_title">
 			<textarea name="content" class='autosize' id="poster_textarea">Type your message here...</textarea>
@@ -38,8 +57,19 @@
 			</select>
 		</div>
 		<div class="attachemnts">
-			{% for form in formset.forms %}
-				{{form.as_p}}
+			{% for form in file_formset.forms %}
+				<p>
+					<a href="#" class='delete_soft_item'>Delete</a> |
+					{% for f in form %}{{f}}{% endfor %}
+				</p>
+			{% endfor %}
+		</div>
+		<div class='todos'>
+			{% for form in todo_formset.forms %}
+				<p>
+					<a href="#" class='delete_soft_item'>Delete</a> |
+					{% for f in form %}{{f}}{% endfor %}
+				</p>
 			{% endfor %}
 		</div>
 		<div class="controls">
@@ -53,9 +83,8 @@
 						<option value="{{p.id}}">{{p.title}}</option>
 					{% endifequal %}
 				{% endfor %}
-			</select>
-			| 
-			<a href="#" class="add_poster_file">Attach File</a> | <a href="#" class="assign_poster">Assign</a>
+			</select> | 
+			<a href="#" class="add_poster_file">Attach File</a> | <a href="#" class="assign_poster">Assign</a> | <a href="#" class="add_poster_todo">Add Todo Item</a>
 		</div>
 	</form>
 </div>

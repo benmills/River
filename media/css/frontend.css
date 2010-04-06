@@ -94,6 +94,17 @@ a:hover {
 	#poster .controls {
 		padding: 3px 0px;
 	}
+	#poster .todos, #poster .attachemnts {
+		margin: 5px 0px;
+	}
+	#poster .todos textarea {
+		width: 300px;
+		padding: 5px;
+		font-size: 14px;
+		height: 16px;
+		margin: 3px 0px 0px 0px;
+		display: inline;
+	}
 	
 /* Content Box */
 #box {
@@ -191,6 +202,13 @@ a:hover {
 			}
 			#stream .latest_comment .comment {
 				margin: 0px 0px 0px 0px;
+			}
+			#stream .item h2 {
+				border-bottom: 1px dashed #E9E9E9;
+			}
+			#stream .item .todo_list {
+				padding: 6px;
+				background: #EEE;
 			}
 			
 /* Edit Form */
@@ -356,12 +374,16 @@ form.add_comment {
 /* Footer */
 #footer {
 	margin: 12px 0px 0px 0px; padding: 50px 0px 0px 0px;
-	color: #e5e5e5;
+	color: #999;
 	line-height: 23px;
 	font-size: 13px;
 	clear: both;
 	text-align: center;
 }
 	#footer a {
-		color: #e5e5e5;
+		color: #999;
 	}
+	
+.filter {
+	margin: 0px 0px 10px 0px;
+}

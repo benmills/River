@@ -16,4 +16,8 @@ urlpatterns = patterns('',
 	url(r'^task/add/(?P<id>[0-9]+)/$', 'post.views.add_task', name="add_task"),
 	url(r'^task/remove/(?P<id>[0-9]+)/$', 'post.views.remove_task', name="remove_task"),
 	url(r'^task/complete/(?P<id>[0-9]+)/$', 'post.views.complete_task', name="complete_task"),
+	
+	url(r'^todo/complete/(?P<id>[0-9]+)/$', 'post.views.complete_todo', name="complete_todo"),
+	
+	url(r'^filter/save/$', 'post.views.save_filter', name="save_filter"),
 )

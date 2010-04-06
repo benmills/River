@@ -33,7 +33,29 @@
 			
 			<span class='post_text'>
 				<h1 class='title'>{{post.title}}</h1>
+				
+				{% if post.todoitem_set.all %}
+					<div class='todo_list'>
+						{% for todo in post.todoitem_set.all %}
+							{% if not todo.is_completed %}
+								<p>{{todo.content}} | <a href="{% url complete_todo todo.id %}">Complete</a></p>
+							{% else %}
+								<p>{{todo.content}} | completed by {{todo.completed_by.get_profile.get_name}} {{todo.completed_date|timesince}} ago</p>
+							{% endif %}
+						{% endfor %}
+					</div>
+				{% endif %}
+				
 				{{post.content|urlize|textile}}
+				
+				{% if post.postfile_set.all %}
+				<div class="files">
+					<h2>Files</h2>
+					{% for f in post.postfile_set.all %}
+						<a href="/media/{{f.file}}" target="_blank">{{f.get_name}}</a><br/>
+					{% endfor %}
+				</div>
+				{% endif %}
 			</span>
 			{% ifequal user post.author  %}
 				<form class="edit_form" method="post" action="{% url edit_post post.id %}">

@@ -25,6 +25,9 @@ class UserProfile(models.Model):
 	def update_active(self):
 		self.last_active = datetime.now()
 		self.save()
+		
+	def get_filter(self):
+		return self.user.filters.all()[0]
 
 class Task(models.Model):
 	user = models.ForeignKey(User)
