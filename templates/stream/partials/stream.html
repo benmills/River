@@ -10,6 +10,13 @@
 	
 	<span class='items'>
 	{% for s in stream %}
+		{% ifchanged s.posted_date.day %}
+			</span>
+			</div>
+			<h2 class='day_title'>{{s.posted_date|date:"l d M"}}</h2>
+			<div id="stream"{% if not project_id %} class='full_width'{% endif %}>
+			<span class='items'>
+		{% endifchanged %}
 		{% include "stream/partials/stream_item.html" %}
 	{% endfor %}
 	</span>
