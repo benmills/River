@@ -1,5 +1,13 @@
 # Django settings for river project.
 
+import os
+import sys
+
+PATH = os.path.abspath(os.path.dirname(__file__))
+sys.path.append(os.path.join(PATH, 'apps'))
+sys.path.append(os.path.join(PATH, 'libs'))
+
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 LOCAL_DEVELOPMENT = True

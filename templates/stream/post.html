@@ -58,9 +58,29 @@
 				{% endif %}
 			</span>
 			{% ifequal user post.author  %}
-				<form class="edit_form" method="post" action="{% url edit_post post.id %}">
+				<form class="edit_form" method="post" action="{% url edit_post post.id %}" enctype="multipart/form-data">
+					{{file_formset.management_form}}
 					<input name='title' class='text' value="{{post.title}}">
 					<textarea name='content'>{{post.content}}</textarea>
+					<h1>Attachments: <a href="#" class="add_poster_file">Attach File</a> | <a href="#" class="assign_poster">Assign</a> | <a href="#" class="add_poster_todo">Add Todo Item</a></h1>
+					{% for form in file_formset.forms %}
+						<p>
+							<a href="#" class='delete_soft_item'>Delete</a> |
+							{% if form.instance.file %}
+								<a href="/media/{{form.instance.file}}">Current File</a> |
+							{% endif %}
+							{% for f in form %}
+								{{f}}
+							{% endfor %}
+						</p>
+					{% endfor %}
+					<div class="assigner">
+						<select multiple="multiple" name="assigned" id="id_assigned">
+							{% for u in users %}
+								<option value="{{u.id}}">{{u.get_profile.get_name}}</option>
+							{% endfor %}
+						</select>
+					</div>
 					<input type="submit" value="Save Changes"> <a href="#" class="cancel_edit">Nevermind</a>
 				</form>
 			{% endifequal %}

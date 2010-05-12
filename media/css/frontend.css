@@ -145,6 +145,13 @@ a:hover {
 	
 /* Stream */
 
+h2.day_title {
+	margin: 30px 0px 0px 10px;
+	font-size: 24px;
+	color: #979797;
+	text-shadow: #FFF 0px 1px 0px, #636363 0px -1px 0px;
+}
+
 #stream {
 	margin: 10px 0px 0px 0px;
 	background: #FFF;
@@ -171,6 +178,10 @@ a:hover {
 			margin: 0px 0px 20px 0px;
 			font-size: 24px;
 		}
+			#stream h1 small {
+				font-size: 18px;
+				color: #999;
+			}
 		#stream .item.odd {
 			background: #fbfbfc;
 		}
@@ -213,7 +224,7 @@ a:hover {
 			
 /* Edit Form */
 .edit_form {
-	display: none;
+	/*display: none;*/
 }
 .edit_form textarea {
 	width: 1024px;
