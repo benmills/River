@@ -20,12 +20,16 @@
 
 <div id="main">
 	<div id="header">
-		<h1><a href="{% url main_stream %}">Appventurous</a> <span class='project'>{% if project %}{% project_menu project.id %}{% else %}{% project_menu %}{% endif %}</span></h1>
-		<div id="user_info">
-			Welcome back {{user.get_profile.get_name}}
-			<p class='controls'>
-				<a href="{% url log_out %}">Logout</a> | <a href="{% url user_profile %}">Profile</a> | <a href="{% url user_board %}">Board</a> | <a href="{% url user_tasks %}">Tasks</a>
-			</p>
+		<div class="inner">
+			<h1><a href="{% url main_stream %}">River</a><!--<span class='project'>{% if project %}{% project_menu project.id %}{% else %}{% project_menu %}{% endif %}</span>--></h1>
+			<div id="user_info">
+				<p>Welcome back {{user.get_profile.get_name}} <span class="seperator">&nbsp;</span> &nbsp; <a href="{% url user_profile %}">profile</a> <a href="{% url log_out %}">logout</a>  
+				
+				<!--<a href="{% url user_board %}">Board</a> 
+				<a href="{% url user_tasks %}">Tasks</a>-->
+				</p>
+			</div>
+			<div class="clear"></div>
 		</div>
 		{% block header %}
 			
