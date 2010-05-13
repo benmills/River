@@ -3,6 +3,7 @@
 {% load post_tags %}
 
 <div class='item{% cycle '' ' odd' %}'>
+	<div class="inner-content">
 	<h1 class="title">{{s.title}}</h1>
 	
 	{% if s.todoitem_set.all %}
@@ -18,6 +19,7 @@
 	{% endif %}
 	
 	{{s.content|urlize|textile}}
+	</div>
 	
 	{% if s.postfile_set.all %}
 	<div class="files">
@@ -27,6 +29,14 @@
 		{% endfor %}
 	</div>
 	{% endif %}
+	
+	{% ifnotequal s.posted_date|date:"d/m/Y/H:i:s" s.updated|date:"d/m/Y/H:i:s"  %}
+		{% if s.last_comment %}
+			<div class='latest_comment'>
+				{% comment s.last_comment %}
+			</div>
+		{% endif %}
+	{% endifnotequal %}
 	
 	<div class='info'>
 		Posted by {{s.author.get_profile.get_name}} {{s.posted_date|timesince}} ago
@@ -44,11 +54,4 @@
 			 | {% if user|istask:s %}<a class='right' href="{% url remove_task s.id %}?next={{request.path}}">Remove from tasks</a>{% else %}<a class='right' href="{% url add_task s.id %}?next={{request.path}}">Add to tasks</a>{% endif %}
 		</span>
 	</div>
-	{% ifnotequal s.posted_date|date:"d/m/Y/H:i:s" s.updated|date:"d/m/Y/H:i:s"  %}
-		{% if s.last_comment %}
-			<div class='latest_comment'>
-				{% comment s.last_comment %}
-			</div>
-		{% endif %}
-	{% endifnotequal %}
 </div>

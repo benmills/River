@@ -150,12 +150,15 @@ h2.day_title {
 	-webkit-box-shadow: #dddddd 0px 0px 8px;
 	-moz-box-shadow: #dddddd 0px 0px 8px;
 }
+
 	#stream.full_width {
 		float: none;
 		width: 100%;
 	}
+	
+
 	#stream .item {
-		margin: 0 0 10px 0; padding: 0;
+		margin: 0 0 30px 0; padding: 0;
 		background: #f3f3f3;
 		-moz-box-shadow: 1px 1px 4px #18293e;
 		-webkit-box-shadow: 1px 1px 4px #18293e;
@@ -165,6 +168,12 @@ h2.day_title {
 		clear: left;
 		width: 960px;
 	}
+		#stream .item .inner-content{
+			float: left;
+			clear: left;
+			padding: 32px 38px 32px 38px;
+			width: 884px;
+		}
 		#stream .info_header {
 			padding: 5px 10px; margin: -15px -10px 10px -10px;
 			background: #e0ebf9;
@@ -185,20 +194,27 @@ h2.day_title {
 			background: #fbf2d1;
 		}
 		#stream .item .info {
-			margin: 3px 0px 0px 0px;
 			font-size: 12px;
 			color: #cfcfcf;
+			float: left;
+			clear: left;
+			width: 880px;
+			background: #264264;
+			color: #b6e4f0;
+			padding: 30px 40px 30px 40px;
 		}
 			#stream .item .info a {
-				color: #cfcfcf;
+				color: #ffd77f;
+				text-decoration: none;
 			}
 			#stream .item .controls {
 				float: right;
 			}
 		#stream .latest_comment {
-			margin: 4px 0px 0px 0px;
-			padding: 4px 8px;
+			float: left; clear: left;
 			background: #f6f6f6;
+			width: 880px;
+			padding: 20px 40px 20px 40px;
 		}
 			#stream .latest_comment h3 {
 				font-weight: bold;
@@ -223,12 +239,12 @@ h2.day_title {
 	/*display: none;*/
 }
 .edit_form textarea {
-	width: 1024px;
+	width: 956px;
 	height: 350px;
 	font-size: 15px;
 }
 .edit_form input.text {
-	width: 1024px;
+	width: 954px;
 	font-size: 24px;
 }
 				
@@ -294,7 +310,7 @@ form.add_comment {
 	padding: 10px;
 }
 	form.add_comment textarea {
-		width: 1024px;
+		width: 960px;
 		height: 40px;
 		font-size: 14px;
 	}
