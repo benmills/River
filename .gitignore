@@ -1,2 +1,3 @@
 *.pyc
 /media/post-files/*
+settings.py
