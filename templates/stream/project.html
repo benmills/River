@@ -3,7 +3,9 @@
 
 {% block content %}
 	{% poster project.id %}
+	<span class='project_items'>
 	{% post_stream request project.id %}
+	</span>
 	<div class="project_info">
 		<span class="description">
 			<h1>{{project.title}}</h1>
@@ -21,7 +23,7 @@
 		</div>
 		
 		<div class='files list'>
-			<h2>Files</h2>
+			<h2>Files (Demo)</h2>
 			<ul>
 				<li>Intro-to-git.pdf</li>
 				<li>screenshot.png</li>

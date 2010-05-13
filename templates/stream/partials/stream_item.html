@@ -4,7 +4,7 @@
 
 <div class='item{% cycle '' ' odd' %}'>
 	<div class='item_content'>
-		<h1 class="title">{{s.title}}</h1>
+		<h1 class="title"><a href="{% url post s.id %}">{{s.title}}</a></h1>
 	
 		{% if s.todoitem_set.all %}
 			<div class='todo_list'>
@@ -33,11 +33,11 @@
 	</div>
 	
 	{% ifnotequal s.posted_date|date:"d/m/Y/H:i:s" s.updated|date:"d/m/Y/H:i:s"  %}
-		{% if s.last_comment %}
-			<div class='latest_comment'>
-				{% comment s.last_comment %}
-			</div>
-		{% endif %}
+		{# {% if s.last_comment %} #}
+		{# 	<div class='latest_comment'> #}
+		{# 		{% comment s.last_comment %} #}
+		{# 	</div> #}
+		{# {% endif %} #}
 	{% endifnotequal %}
 	
 	<div class='info'>

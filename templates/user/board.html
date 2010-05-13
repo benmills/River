@@ -2,6 +2,9 @@
 {% load post_tags %}
 
 {% block content %}
+<div class='nav offpage'>
+	<a href="/">Main Stream</a> | <a href="/user/board/">Board</a> | <a href="/user/tasks/">Tasks</a>
+</div>
 	<div id="stream" class="full_width">
 		{% for s in board %}
 			{% include "stream/partials/stream_item.html" %}

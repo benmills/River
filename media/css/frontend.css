@@ -133,7 +133,7 @@ a:hover {
 		}
 		form.edit p {
 			margin: 0px 0px 8px 0px; padding: 0px 0px 8px 0px;
-			border-bottom: 1px dashed #EEE;
+			border-bottom: 1px dotted #aaaaaa;
 			font-size: 10px;
 		}
 		form.edit p input, form.edit p textarea {
@@ -162,11 +162,8 @@ h2.day_title {
 
 #stream {
 	margin: 10px 0px 0px 0px;
-	background: #FFF;
 	float: left;
-	width: 630px;
-	-webkit-box-shadow: #dddddd 0px 0px 8px;
-	-moz-box-shadow: #dddddd 0px 0px 8px;
+	width: 611px;
 }
 
 	#stream.full_width {
@@ -185,7 +182,11 @@ h2.day_title {
 		float: left;
 		clear: left;
 		width: 960px;
+		font-size: 13px;
 	}
+		.project_items #stream .item {
+			width: 600px;
+		}
 		#stream .item .item_content {
 			padding: 30px;
 		}
@@ -206,13 +207,17 @@ h2.day_title {
 			margin: 0px 0px 20px 0px;
 			font-size: 24px;
 		}
+			#stream h1.title a {
+				color: #4b4b4b;
+				text-decoration: none;
+			}
 			#stream h1 small {
 				font-size: 18px;
 				color: #999;
 			}
 
 		#stream .item .info {
-			font-size: 12px;
+			font-size: 13px;
 			color: #cfcfcf;
 			float: left;
 			clear: left;
@@ -221,6 +226,9 @@ h2.day_title {
 			color: #b6e4f0;
 			padding: 30px 40px 30px 40px;
 		}
+			.project_items #stream .item .info {
+				width: 520px;
+			}
 			#stream .item .info a {
 				color: #ffd77f;
 				text-decoration: none;
@@ -239,17 +247,17 @@ h2.day_title {
 				color: #cfcfcf;
 			}
 			#stream .latest_comment h3, #stream .latest_comment {
-				font-size: 12px;
+				font-size: 13px;
 			}
 			#stream .latest_comment .comment {
 				margin: 0px 0px 0px 0px;
 			}
 			#stream .item h2 {
-				border-bottom: 1px dashed #E9E9E9;
+				border-bottom: 1px dotted #aaaaaa;
 			}
 			#stream .item .todo_list {
-				padding: 6px;
-				background: #EEE;
+				padding: 6px; margin: 0px 0px 10px 0px;
+				background: #e5e5e5;
 			}
 			
 /* Edit Form */
@@ -307,28 +315,32 @@ h2.day_title {
 		}
 				
 /* Comments */
+.comment_div {
+	padding: 30px;
+	background: #e5e5e5;
+}
 .comments {
-	padding: 10px;
 	font-size: 14px;
-	color: #7d7d7d;
+	color: #555555;
 }
 	.comment {
-		margin: 0px 0px 14px 0px;
+		margin: 0px 0px 14px 0px; padding: 0px 0px 15px 0px;
+		border-bottom: 1px dotted #aaaaaa;
 	}
 	.comment.last {
 		margin: 0px 0px 0px 0px;
 	}
-		.comment .info {
-			margin: 7px 0px 0px 0px;
-			font-size: 12px;
-			color: #cfcfcf;
+		.comment .comment_info {
+			color: #333333;
+			margin: 0px 0px 10px 0px;
 		}
-form.add_comment {
-	background: #efefef;
-	padding: 10px;
-}
+		.comment .posted {
+			float: right;
+			color: #808080;
+			font-style:italic;
+		}
 	form.add_comment textarea {
-		width: 960px;
+		width: 900px;
 		height: 40px;
 		font-size: 14px;
 	}
@@ -338,41 +350,41 @@ form.add_comment {
 .project_info {
 	margin: 10px 0px 0px 20px;
 	float: left;
-	width: 399px;
+	width: 329px;
 	line-height: 20px;
 	color: #979797;
 }
 	.project_info h1 {
-		font-size: 30px;
+		font-size: 21px;
 		margin: 0px 0px 19px 0px;
-		text-shadow: #FFF 0px 1px 0px;
-		color: #676767;
+		color: #FFF;
 	}
 	.project_info .description {
 		padding: 0px 0px 10px 0px;
 		display: block;
-		border-bottom: 4px solid #f7f7f7;
+		border-bottom: 4px solid #264264;
+		color: #bbe1eb;
+		font-size: 13px;
 	}
 	.project_info .description p {
 		margin: 0px 0px 10px 0px;
-		text-shadow: #FFF 0px 1px 0px;
 	}
 	.project_info h2 {
-		margin: 20px 0px 15px 0px;
+		margin: 10px 0px 5px 0px;
 		padding: 0px 0px 5px 0px;
-		font-size: 20px;
-		color: #7d7d7d;
-		border-bottom: 1px dotted #dbdbdb;
+		font-size: 13px;
+		color: #fff;
 	}
 	.project_info li {
 		margin: 0px 0px 8px 0px;
 		font-size: 14px;
 		line-height: 13px;
-		color: #aeadad;
+		color: #d0e9ef;
 		word-wrap: break-word;
 	}
 		.project_info li a {
-			color: #aeadad;
+			color: #d0e9ef;
+			text-decoration: none;
 		}
 		.project_info li .info {
 			display: block;
@@ -381,8 +393,9 @@ form.add_comment {
 		}
 	.project_info .list {
 		margin: 0px 10px 0px 0px;
-		width: 194px;
+		width: 124px;
 		float: left;
+
 	}
 		.project_info .list:last-child {
 			margin: 0px 0px 0px 0px;
@@ -430,3 +443,14 @@ form.add_comment {
 	color: #b6e4f0;
 	text-align: right;
 }
+	.nav {
+		margin: 3px 0px 0px 0px;	
+		float: left;
+	}
+	.nav.offpage {
+		margin: 3px 0px 18px 0px;
+	}
+		.nav a {
+			color: #b6e4f0;
+			text-decoration: none;
+		}

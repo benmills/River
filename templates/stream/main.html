@@ -2,7 +2,11 @@
 {% load post_tags %}
 
 {% block content %}
+<div class='nav'>
+	<a href="/">Main Stream</a> | <a href="/user/board/">Board</a> | <a href="/user/tasks/">Tasks</a>
+</div>
 	<div class="filter">
+
 		<form method="POST" action='{% url save_filter %}'>
 		Showing 
 		<select name="type">
