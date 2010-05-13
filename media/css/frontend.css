@@ -46,6 +46,10 @@ a:hover {
 	
 	#header #user_info a{ margin: 0 5px 0 0; }
 	#header #user_info a:hover{ text-decoration: underline; }
+	.project_menu {
+		font-size: 12px;
+		color: #385374;
+	}
 	
 #content{
 	margin: 0 auto; padding: 20px 0 20px 0;
@@ -259,7 +263,34 @@ h2.day_title {
 				padding: 6px; margin: 0px 0px 10px 0px;
 				background: #e5e5e5;
 			}
-			
+
+/* Tasks */
+.item_complete {
+	margin: 0 0 20px 0; padding: 10px;
+	background: #7591b4;
+	-moz-box-shadow: 1px 1px 4px #18293e;
+	-webkit-box-shadow: 1px 1px 4px #18293e;
+	box-shadow: 1px 1px 4px #18293e;
+	line-height: 20px;
+	float: left;
+	clear: left;
+	width: 940px;
+	font-size: 13px;
+}
+	.item_complete a {
+		color: #3f4c5c;
+	}
+	#stream .item_complete h1.title {
+		font-size: 14px;
+		float: left;
+		margin: 0px 0px 0px 0px;
+		color: #3f4c5c;
+	}
+	.item_complete .reopen_info {
+		float: right;
+	}
+
+		
 /* Edit Form */
 .edit_form {
 	/*display: none;*/

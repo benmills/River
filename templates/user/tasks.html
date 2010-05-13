@@ -9,6 +9,8 @@
 	</div>
 	<div id="stream" class="full_width">
 		{% for t in tasks %}
+		{% if not t.is_completed %}
+			
 		<div class='item'>
 			<div class='item_content'>
 			<h1 class="title">{{t.post.title}} {% if t.assigned_by %}<small>Assigned By {{t.assigned_by.get_profile.get_name}}</small>{% endif %}</h1>
@@ -26,6 +28,19 @@
 				</span>
 			</div>
 		</div>
+		{% endif %}
+		{% endfor %}
+		
+		{% for t in tasks %}
+		{% if t.is_completed %}
+		
+		<div class='item_complete'>
+			<h1 class="title">{{t.post.title}} {% if t.assigned_by %}<small>Assigned By {{t.assigned_by.get_profile.get_name}}</small>{% endif %}</h1>
+			<div class='reopen_info'>
+				<a href="{% url complete_task t.id %}">Reopen Task</a>
+			</div>
+		</div>
+		{% endif %}
 		{% endfor %}
 	</div>
 {% endblock %}

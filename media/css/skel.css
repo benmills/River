@@ -1,0 +1,96 @@
+body {
+	background: #2f517b url('/media/imgs/login-bg.png') repeat-x;
+	color: #4b4b4b;
+	font-family: 'Trebuchet MS', Helvetica;
+	font-size: 11px;
+}
+
+#main {
+	width: auto;
+}
+
+a {
+	color: #3c87c7;
+}
+a:hover {
+	color: #4497dd;
+}
+
+.clear{ clear: both; }
+
+#header {
+	margin: 0 auto; padding: 20px 0 20px 0;
+	width: auto;
+	background: #253d5a;
+	color: #b6e4f0;
+}
+	#header h1 {
+		float: left;
+		font-size: 19px;
+	}
+	#header a{
+		text-decoration: none;
+		color: #fff;
+	}
+	#header span.seperator{
+		display: inline;
+		border-right: 1px dotted #fff;
+	}
+		#header h1 a {
+			color: #b6e4f0;
+		}
+		
+	#user_info {
+		float: right;
+	}
+	
+	#header #user_info a{ margin: 0 5px 0 0; }
+	#header #user_info a:hover{ text-decoration: underline; }
+	
+#content{
+	margin: 0 auto; padding: 20px 0 20px 0;
+	width: 960px;
+	position: relative;
+}
+
+.inner{
+	margin: 0 auto;
+	width: 960px;
+}
+
+
+
+/* Form */
+	form.edit {
+		font-size: 18px;
+	}
+		form.edit label {
+			display: inline-block;
+			width: 20%;
+			font-size: 18px;
+		}
+		form.edit p {
+			margin: 0px 0px 8px 0px; padding: 0px 0px 8px 0px;
+			font-size: 10px;
+		}
+		form.edit p input, form.edit p textarea {
+			width: 79%;
+			font-size: 18px;
+		}
+
+/* Skeleton */
+#skel_box {
+	background: #f3f3f3;
+	padding: 30px;
+	margin: 100px auto;
+	width: 580px;
+}
+	#skel_box h2 {
+		background: url('/media/imgs/login-logo.png') no-repeat right top;
+		font-size: 24px;
+		margin: 10px 0px 20px 0px; padding: 0px 0px 50px 0px;
+		border-bottom: 1px dotted #aaaaaa;
+	}
+	#skel_box form.edit p input {
+		width: 385px;
+	}

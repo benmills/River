@@ -1,8 +1,9 @@
-	Projects: 
-{% for p in projects %}
+&nbsp | 
+<span class='project_menu'>{% for p in projects %}
 	{% ifequal p.id project_id  %}
 		<a class='on' href="{% url project p.id %}">{{p.title}}</a>{% if not forloop.last %} | {% endif %}
 	{% else %}
 		<a href="{% url project p.id %}">{{p.title}}</a>{% if not forloop.last %} | {% endif %}
 	{% endifequal %}
 {% endfor %}
+</span>

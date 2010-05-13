@@ -21,7 +21,7 @@
 <div id="main">
 	<div id="header">
 		<div class="inner">
-			<h1><a href="{% url main_stream %}">Company Name, Inc.</a><!--<span class='project'>{% if project %}{% project_menu project.id %}{% else %}{% project_menu %}{% endif %}</span>--></h1>
+			<h1><a href="{% url main_stream %}">Company Name, Inc.</a></h1>
 			<div id="user_info">
 				<p>Welcome back {{user.get_profile.get_name}} <span class="seperator">&nbsp;</span> &nbsp; <a href="{% url user_profile %}">profile</a> <a href="{% url log_out %}">logout</a>  
 				
