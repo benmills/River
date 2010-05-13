@@ -65,8 +65,9 @@ a:hover {
 	padding: 30px;
 	background: #FFF;
 	width: 900px;
-	-webkit-box-shadow: #18293e 0px 0px 8px;
-	-moz-box-shadow: #18293e 0px 0px 8px;
+	-moz-box-shadow: 1px 1px 4px #18293e;
+	-webkit-box-shadow: 1px 1px 4px #18293e;
+	box-shadow: 1px 1px 4px #18293e;
 }
 	#poster_title {
 		padding: 0px 0px 0px 0px; margin: 0px -2px 13px 0px;
@@ -172,7 +173,7 @@ h2.day_title {
 		width: 100%;
 	}
 	#stream .item {
-		margin: 0 0 10px 0; padding: 0;
+		margin: 0 0 40px 0; padding: 0;
 		background: #f3f3f3;
 		-moz-box-shadow: 1px 1px 4px #18293e;
 		-webkit-box-shadow: 1px 1px 4px #18293e;
@@ -182,6 +183,17 @@ h2.day_title {
 		clear: left;
 		width: 960px;
 	}
+		#stream .item .item_content {
+			padding: 30px;
+		}
+		#stream .item .info {
+			background: #264264;
+			padding: 30px;
+		}
+			#stream .item .info a.highlight {
+				color: #ffd77f;
+				text-decoration: none;
+			}
 		#stream .info_header {
 			padding: 5px 10px; margin: -15px -10px 10px -10px;
 			background: #e0ebf9;
@@ -195,12 +207,7 @@ h2.day_title {
 				font-size: 18px;
 				color: #999;
 			}
-		#stream .item.odd {
-			/*background: #fbfbfc;*/
-		}
-		#stream .items .item:hover {
-			background: #fbf2d1;
-		}
+
 		#stream .item .info {
 			margin: 3px 0px 0px 0px;
 			font-size: 12px;
@@ -398,14 +405,14 @@ form.add_comment {
 /* Footer */
 #footer {
 	margin: 12px 0px 0px 0px; padding: 50px 0px 25px 0px;
-	color: #999;
+	color: #385c88;
 	line-height: 23px;
 	font-size: 13px;
 	clear: both;
 	text-align: center;
 }
 	#footer a {
-		color: #999;
+		color: #385c88;
 	}
 	
 .filter {
