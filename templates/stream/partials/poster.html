@@ -7,6 +7,7 @@
 		//$("select#id_assigned").hide();
 		$('div.assigner').hide();
 		$('div.todos').hide();
+		$('div.attachemnts').hide();
 		
 		$("a.assign_poster").click(function(e){
 			e.preventDefault();
@@ -50,9 +51,9 @@
 	<form method="post" id="main_poster" enctype="multipart/form-data">
 		{{file_formset.management_form}}
 		{{todo_formset.management_form}}
-		<div class="inputs">
+		<div class="inputs poster_footer">
 			<input name="title" id="poster_title">
-			<textarea name="content" class='autosize' id="poster_textarea">Type your message here...</textarea>
+			<textarea name="content" class='autosize post_text' id="poster_textarea">Type your message here...</textarea>
 			<div class="assigner">
 				<select multiple="multiple" name="assigned" id="id_assigned">
 					{% for u in users %}
@@ -77,7 +78,7 @@
 				{% endfor %}
 			</div>
 			<div class="controls">
-				<input class='post_button' type="submit" value="" id="Add" />
+				<input class='post_button' type="submit" value="" id="Add" /> <span class='between'>in</span>
 				<select name="project">
 					<option value="0">Main Stream</option>
 					{% for p in projects %}
