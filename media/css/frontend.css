@@ -64,8 +64,8 @@ a:hover {
 	padding: 10px;
 	background: #FFF;
 	width: 940px;
-	-webkit-box-shadow: #dddddd 0px 0px 8px;
-	-moz-box-shadow: #dddddd 0px 0px 8px;
+	-webkit-box-shadow: #18293e 0px 0px 8px;
+	-moz-box-shadow: #18293e 0px 0px 8px;
 }
 	#poster_title {
 		padding: 0px 0px 0px 0px; margin: 0px -2px 13px 0px;
@@ -81,6 +81,11 @@ a:hover {
 		font-size: 18px;
 		height: 20px;
 	}
+	#poster input.post_button {
+		background: url('/media/imgs/post-button.png');
+		width: 64px; height: 32px;
+		border: none;
+	}
 	#poster .controls {
 		padding: 3px 0px;
 	}
@@ -94,6 +99,10 @@ a:hover {
 		height: 16px;
 		margin: 3px 0px 0px 0px;
 		display: inline;
+	}
+	#poster .extras {
+		margin: 0px 500px 0px 0px;
+		float: right;
 	}
 	
 /* Content Box */
@@ -393,4 +402,6 @@ form.add_comment {
 	
 .filter {
 	margin: 0px 0px 10px 0px;
+	color: #b6e4f0;
+	text-align: right;
 }
