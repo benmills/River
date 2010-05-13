@@ -1,3 +1,4 @@
 *.pyc
 /media/post-files/*
 settings.py
+data.db
