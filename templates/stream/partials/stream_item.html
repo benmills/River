@@ -3,32 +3,34 @@
 {% load post_tags %}
 
 <div class='item{% cycle '' ' odd' %}'>
-	<div class="inner-content">
-	<h1 class="title">{{s.title}}</h1>
+	<div class='item_content'>
+		<h1 class="title">{{s.title}}</h1>
 	
-	{% if s.todoitem_set.all %}
-		<div class='todo_list'>
-			{% for todo in s.todoitem_set.all %}
-				{% if not todo.is_completed %}
-					<p>{{todo.content}} | <a href="{% url complete_todo todo.id %}">Complete</a></p>
-				{% else %}
-					<p>{{todo.content}} | completed by {{todo.completed_by.get_profile.get_name}} {{todo.completed_date|timesince}} ago</p>
-				{% endif %}
+		{% if s.todoitem_set.all %}
+			<div class='todo_list'>
+				{% for todo in s.todoitem_set.all %}
+					{% if not todo.is_completed %}
+						<p>{{todo.content}} | <a href="{% url complete_todo todo.id %}">Complete</a></p>
+					{% else %}
+						<p>{{todo.content}} | completed by {{todo.completed_by.get_profile.get_name}} {{todo.completed_date|timesince}} ago</p>
+					{% endif %}
+				{% endfor %}
+			</div>
+		{% endif %}
+	
+		{{s.content|urlize|textile}}
+	
+		{% if s.postfile_set.all %}
+		<div class="files">
+			<h2>Files</h2>
+			{% for f in s.postfile_set.all %}
+				<a href="/media/{{f.file}}" target="_blank">{{f.get_name}}</a><br/>
 			{% endfor %}
 		</div>
-	{% endif %}
+
+		{% endif %}
 	
-	{{s.content|urlize|textile}}
 	</div>
-	
-	{% if s.postfile_set.all %}
-	<div class="files">
-		<h2>Files</h2>
-		{% for f in s.postfile_set.all %}
-			<a href="/media/{{f.file}}" target="_blank">{{f.get_name}}</a><br/>
-		{% endfor %}
-	</div>
-	{% endif %}
 	
 	{% ifnotequal s.posted_date|date:"d/m/Y/H:i:s" s.updated|date:"d/m/Y/H:i:s"  %}
 		{% if s.last_comment %}
@@ -39,7 +41,7 @@
 	{% endifnotequal %}
 	
 	<div class='info'>
-		Posted by {{s.author.get_profile.get_name}} {{s.posted_date|timesince}} ago
+		Posted by <a class='highlight' href="#">{{s.author.get_profile.get_name}}</a> {{s.posted_date|timesince}} ago
 		{% if s.project %}
 			in <a href="{% url project s.project.id %}">{{s.project.title}}</a>
 		{% endif %} | <a href="{% url post s.id %}">View this post</a> | <a href="{% url post s.id %}#comments">{{s.comment_count}}</a>

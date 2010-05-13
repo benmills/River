@@ -51,7 +51,7 @@
 	<form method="post" id="main_poster" enctype="multipart/form-data">
 		{{file_formset.management_form}}
 		{{todo_formset.management_form}}
-		<div class="inputs">
+		<div class="inputs poster_footer">
 			<input name="title" id="poster_title">
 			<textarea name="content" class='autosize post_text' id="poster_textarea">Type your message here...</textarea>
 			<div class="assigner">
@@ -78,8 +78,7 @@
 				{% endfor %}
 			</div>
 			<div class="controls">
-				<input class='post_button' type="submit" value="" id="Add" />
-				in
+				<input class='post_button' type="submit" value="" id="Add" /> <span class='between'>in</span>
 				<select name="project">
 					<option value="0">Main Stream</option>
 					{% for p in projects %}
