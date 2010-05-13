@@ -1,5 +1,5 @@
 $(function(){
-	$('textarea.autosize, div.todos p textarea').autoResize({
+	$('textarea.autosize').autoResize({
 		animateDuration: 500
 	});
 });
