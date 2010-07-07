@@ -1,0 +1,52 @@
+<script src="/media/js/avts.clonemore.js" type="text/javascript" charset="utf-8"></script>
+<script src="/media/js/avts.attachments.js" type="text/javascript" charset="utf-8"></script>
+
+<div id="poster">
+	<form method="post" id="main_poster" enctype="multipart/form-data">
+		{{file_formset.management_form}}
+		{{todo_formset.management_form}}
+		<div class="inputs poster_footer">
+			<input name="title" id="poster_title">
+			<textarea name="content" class='autosize post_text' id="poster_textarea">Type your message here...</textarea>
+			<div class="assigner">
+				<select multiple="multiple" name="assigned" id="id_assigned">
+					{% for u in users %}
+						<option value="{{u.id}}">{{u.get_profile.get_name}}</option>
+					{% endfor %}
+				</select> <a href='#' class='assign_poster'>Hide</a>
+			</div>
+			<div class="attachemnts">
+				{% for form in file_formset.forms %}
+					<p>
+						<a href="#" class='delete_soft_item'></a>
+						{% for f in form %}{{f}}{% endfor %}
+					</p>
+				{% endfor %}
+			</div>
+			<div class='todos'>
+				{% for form in todo_formset.forms %}
+					<p>
+						<a href="#" class='delete_soft_item'></a>
+						{% for f in form %}{{f}}{% endfor %}
+					</p>
+				{% endfor %}
+			</div>
+			<div class="controls">
+				<input class='post_button' type="submit" value="" id="Add" /> <span class='between'>in</span>
+				<select name="project">
+					<option value="0">Main Stream</option>
+					{% for p in projects %}
+						{% ifequal p.id project_id  %}
+							<option selected='true' value="{{p.id}}">{{p.title}}</option>
+						{% else %}
+							<option value="{{p.id}}">{{p.title}}</option>
+						{% endifequal %}
+					{% endfor %}
+				</select> 
+				<div class='extras'>
+				<a href="#" class="add_poster_file"><img src="/media/imgs/attach-button.png" width="70" height="31" alt="Attach Button"></a> <a href="#" class="assign_poster"><img src="/media/imgs/assign-button.png" width="72" height="31" alt="Assign Button"></a> <a href="#" class="add_poster_todo"><img src="/media/imgs/add-todo-button.png" width="91" height="32" alt="Add Todo Button"></a>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

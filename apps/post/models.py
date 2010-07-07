@@ -22,9 +22,9 @@ class Post(models.Model):
 	
 	def comment_count(self):
 		count = self.comment_set.count()
-		if count == 0: return "No Comments"
-		if count == 1: return "%s Comment" % count
-		else:  return "%s Comments" % count
+		if count == 0: return "no comments"
+		if count == 1: return "%s comment" % count
+		else:  return "%s comments" % count
 		
 	def last_comment(self):
 		comments = self.comment_set.all()

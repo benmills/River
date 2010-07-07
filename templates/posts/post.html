@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% load markup %}
+{% load post_tags %}
+{% load post_filters %}
+
+{% block js %}
+	<script src="/media/js/avts.edit.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/media/js/avts.edit_post.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/media/js/avts.clonemore.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/media/js/avts.attachments.js" type="text/javascript" charset="utf-8"></script>
+{% endblock %}
+
+{% block content %}	
+	<div id="stream" class="full_width">
+		
+		
+		{% load markup %}
+		{% load post_filters %}
+		{% load post_tags %}
+
+		<div class='item no_shadow'>
+			<div class='item_content hide'>
+				<h1 class="title">
+					<a href="{% url post post.id %}">{{post.title}}</a>
+					<a href="#" class='post_project_name'>
+						{% if post.project %}
+							{{post.project}}
+						{% else %}
+							Main Stream
+						{% endif %}
+
+					</a>
+				</h1>
+
+				{% if post.todoitem_set.all %}
+					<div class='todo_list'>
+						{% for todo in post.todoitem_set.all %}
+							{% if not todo.is_completed %}
+								<p><input type='checkbox' class='inline_todo' value='{{todo.id}}'> {{todo.content}}</p>
+							{% else %}
+								<p><input type='checkbox' checked='checked' disabled='disabled'> {{todo.content}} <i>completed by {{todo.completed_by.get_profile.get_name}} {{todo.completed_date|timesince}} ago</i></p>
+							{% endif %}
+						{% endfor %}
+					</div>
+				{% endif %}
+
+				{{post.content|urlize|textile}}
+
+				{% if post.postfile_set.all %}
+				<div class="files">
+					<h2>Files</h2>
+					{% for f in post.postfile_set.all %}
+						<a href="/media/{{f.file}}" target="_blank">{{f.get_name}}</a><br/>
+					{% endfor %}
+				</div>
+
+				{% endif %}
+
+			</div>
+
+			{% ifequal user post.author  %}
+				<form class="edit_form" method="post" action="{% url edit_post post.id %}" enctype="multipart/form-data">
+					<div class='edit_header'>
+						Editing: {{post.title}}
+					</div>
+					{{file_formset.management_form}}
+					{{todo_formset.management_form}}
+					<label>Title</label> <input name='title' class='text' value="{{post.title}}">
+					<label>Content</label> <textarea name='content'>{{post.content}}</textarea>
+					<label>Attachments</label>
+					<div class='edit_attachments'>
+						<h1><a href="#" class="add_poster_file">Attach File</a> | <a href="#" class="assign_poster">Assign</a> | <a href="#" class="add_poster_todo">Add Todo Item</a></h1>
+						<div class="attachemnts">
+							{% for form in file_formset.forms %}
+								<p>
+									<a href="#" class='delete_soft_item_edit'></a>
+									{% if form.instance.file %}
+										<a href="/media/{{form.instance.file}}">Current File</a> |
+									{% endif %}
+									{% for f in form %}
+										{{f}}
+									{% endfor %}
+								</p>
+							{% endfor %}
+						</div>
+						
+						<div class='todos'>
+							{% for form in todo_formset.forms %}
+								<p class='todo_edit'>
+									<a href="#" class='delete_soft_item_edit'></a>
+									{% for f in form %}
+										{{f}}
+									{% endfor %}
+								</p>
+							{% endfor %}
+						</div>
+						
+						<div class="assigner">
+							<select multiple="multiple" name="assigned" id="id_assigned">
+								{% for u in users %}
+									<option value="{{u.id}}">{{u.get_profile.get_name}}</option>
+								{% endfor %}
+							</select>
+						</div>
+					</div>
+					
+					<div class='edit_footer'>
+						<input type="submit" value="Save Changes"> <a href="#" class="cancel_edit">Nevermind</a>
+					</div>
+				</form>
+			{% endifequal %}
+
+			<div class='comment_div hide'>
+				<div class='comments'>
+					{% for comment in post.comment_set.all %}
+						{% comment comment %}
+					{% empty %}
+						<div class='comment last'>
+							There are no comments yet.
+						</div>
+					{% endfor %}
+				</div>
+
+				<form method="post" class='add_comment' id="comments">
+					<textarea class='autosize' name='comment'></textarea>
+					<input type='submit' value='Add Comment' />
+				</form>
+			</div>
+
+			<div class='info hide'>
+				Posted by <a class='highlight' href="">{{post.author.get_profile.get_name}}</a> {{post.posted_date|timesince}} ago
+				{% if post.project %}
+					in <a href="{% url project post.project.id %}">{{post.project.title}}</a>
+				{% endif %} with <a href="{% url post post.id %}#comments">{{post.comment_count}}</a>
+				{% if post.assigned.all %}
+					assigned to 
+					{% ifequal post.assigned.all|length 1 %}
+						{% for u in post.assigned.all %}{{u.get_profile.get_name}}{% endfor %}
+					{% else %}
+						{{post.assigned.all|length}} people
+					{% endifequal %}
+				{% endif %}
+				{% if post.is_completed %}
+					| Completed
+				{% endif %}
+				<span class='controls'>
+					{% if user|ispined:post %}<a class='left' href="{% url unpin post.id %}?next={{request.path}}">Unpin</a>{% else %}<a class='left' href="{% url pin post.id %}?next={{request.path}}">Pin to board</a>{% endif %}
+					 | {% if user|istask:post %}<a class='right' href="{% url remove_task post.id %}?next={{request.path}}">Remove from tasks</a>{% else %}<a class='right' href="{% url add_task post.id %}?next={{request.path}}">Add to tasks</a>{% endif %}
+				</span>
+			</div>
+			
+		</div>
+		
+	</div>
+	</div>
+{% endblock %}

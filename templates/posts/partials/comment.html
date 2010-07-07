@@ -1,0 +1,9 @@
+{% load markup %}
+
+<div class='comment'>
+	<div class="comment_info">
+		{{comment.author.get_profile.get_name}} <span class='posted'>posted {{comment.posted_date|timesince}} ago</span>
+	</div>
+	{{comment.comment|linebreaksbr|urlize|textile}}
+
+</div>

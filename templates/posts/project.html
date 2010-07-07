@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load post_tags %}
+
+{% block content %}
+	{% poster project.id %}
+	<span class='project_items'>
+	{% post_stream request project.id %}
+	</span>
+	<div class="project_info">
+		<span class="description">
+			<h1>{{project.title}}</h1>
+			<p>This is were the project description would go. It would give a short description of what the project is about and some ore stuff that I can't think of right now because its 12:01 and I'm typing too fast. I don't like to use lorum lipsum obviously</p>
+			<p>All I would have to do is alt-tab and type lipsum.com and then I would just copy some text but that wouldn't be nearly as fun</p>
+		</span>
+		
+		<div class='messages list'>
+			<h2>Messages</h2>
+			<ul>
+				{% for p in project.post_set.all %}
+					<li><a href="{% url post p.id %}">{{p.title}}</a> <span class='info'>Lasted updated {{p.updated|timesince}}</span></li>
+				{% endfor %}
+			</ul>
+		</div>
+		
+		<div class='files list'>
+			<h2>Files (Demo)</h2>
+			<ul>
+				<li>Intro-to-git.pdf</li>
+				<li>screenshot.png</li>
+				<li>logo.jpg</li>
+			</ul>
+		</div>
+	</div>
+{% endblock %}

@@ -25,7 +25,7 @@ def create_project(request):
 def project_stream(request, project_id):
 	add_post(request)
 		
-	return render_to_response("stream/project.html", {
+	return render_to_response("posts/project.html", {
 		'project':Project.objects.get(id=project_id),
 		'request':request,
 	}, context_instance=RequestContext(request))

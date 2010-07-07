@@ -1,0 +1,17 @@
+<div id="stream"{% if not project_id %} class='full_width'{% endif %}>
+	{% if notifications %}		
+		<div id="notifications">
+			{{notifications|length}} New Posts:
+			{% for n in notifications %}
+				<a href="{% url post n.id %}">{{n.title}}</a>{% if not forloop.last %}, {% endif %}
+			{% endfor %}
+		</div>
+	{% endif %}
+	
+	{% for s in stream %}
+		{% ifchanged s.posted_date.day %}
+			<div class='day_div'><h2 class='day_title'><span>{{s.posted_date|date:"l d M"}}</span></h2></div>
+		{% endifchanged %}
+		{% include "posts/partials/stream_item.html" %}
+	{% endfor %}
+</div>

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load post_tags %}
+
+{% block content %}
+<div class='nav'>
+	<a href="/">Main Stream</a> | <a href="/user/board/">Board</a> | <a href="/user/tasks/">Tasks</a>
+</div>
+	<div class="filter">
+
+		<form method="POST" action='{% url save_filter %}'>
+		Showing 
+		<select name="type">
+			<option value="0">Everything</option>
+			<option value="1"{% ifequal user.get_profile.get_filter.type 1 %}
+				selected="selected"
+			{% endifequal %}>Todo Lists</option>
+			<option value="2" {% ifequal user.get_profile.get_filter.type 2 %}
+				selected="selected"
+			{% endifequal %}>Files</option>
+		</select>
+		in
+		<select name="project_id">
+			<option value="0">All Projects</option>
+			{% for p in projects %}
+				<option {% ifequal user.get_profile.get_filter.project_id p.id %}
+					selected="selected"
+				{% endifequal %}value="{{p.id}}">{{p.title}}</option>
+			{% endfor %}
+		</select>
+		assigned to
+		<select name="assigned_id">
+			<option value="0">Anyone</option>
+			{% for u in users  %}
+				<option {% ifequal user.get_profile.get_filter.assigned_id u.id %}
+					selected="selected"
+				{% endifequal %} value="{{u.id}}">{{u.get_profile.get_name}}</option>
+			{% endfor %}
+		</select>
+		and posted by
+		<select name="author_id">
+			<option value="0">Anyone</option>
+			{% for u in users  %}
+				<option {% ifequal user.get_profile.get_filter.author_id u.id %}
+					selected="selected"
+				{% endifequal %} value="{{u.id}}">{{u.get_profile.get_name}}</option>
+			{% endfor %}
+		</select>
+		<input type="hidden" name="owner" value="{{user.id}}" id="owner">
+		<input type="submit" value="Filter" />
+		</form>
+	</div>
+	{% poster %}
+	{% post_stream request %}
+{% endblock %}

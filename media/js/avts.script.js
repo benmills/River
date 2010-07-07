@@ -21,4 +21,8 @@ $(function() {
 		if (submitting.replace(/\s/g, "").length <= 0 || submitting == 'Type your message here...') 
 		return false;
 	});
+	
+	$(".inline_todo").change(function() {
+		window.location = '/todo/complete/'+$(this).val()+"?next="+window.location;
+	});
 });

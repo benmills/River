@@ -11,16 +11,69 @@
 		{% for t in tasks %}
 		{% if not t.is_completed %}
 			
-		<div class='item'>
+		<div class='item{% cycle '' ' odd' %}'>
 			<div class='item_content'>
-			<h1 class="title">{{t.post.title}} {% if t.assigned_by %}<small>Assigned By {{t.assigned_by.get_profile.get_name}}</small>{% endif %}</h1>
-			{{t.post.content|textile|mediaize|safe}}
+				<h1 class="title">
+					<a href="{% url post t.post.id %}">{{t.post}}</a>
+					<a href="#" class='post_project_name'>
+						{% if t.post.project %}
+							{{t.post.project}}
+						{% else %}
+							Main Stream
+						{% endif %}
+
+					</a>
+				</h1>
+
+				{% if t.post.todoitem_set.all %}
+					<div class='todo_list'>
+						{% for todo in t.post.todoitem_set.all %}
+							{% if not todo.is_completed %}
+								<p><input type='checkbox' class='inline_todo' value='{{todo.id}}'> {{todo.content}}</p>
+							{% else %}
+								<p><input type='checkbox' checked='checked' disabled='disabled'> {{todo.content}} <i>completed by {{todo.completed_by.get_profile.get_name}} {{todo.completed_date|timesince}} ago</i></p>
+							{% endif %}
+						{% endfor %}
+					</div>
+				{% endif %}
+
+				{{t.post.content|urlize|textile}}
+
+				{% if t.post.postfile_set.all %}
+				<div class="files">
+					{% for f in t.post.postfile_set.all %}
+						<a href="/media/{{f.file}}" target="_blank">{{f.get_name}}</a><br/>
+					{% endfor %}
+				</div>
+
+				{% endif %}
+
 			</div>
+
+			{% ifnotequal t.post.posted_date|date:"d/m/Y/H:i:s" t.post.updated|date:"d/m/Y/H:i:s"  %}
+				{# {% if s.last_comment %} #}
+				{# 	<div class='latest_comment'> #}
+				{# 		{% comment s.last_comment %} #}
+				{# 	</div> #}
+				{# {% endif %} #}
+			{% endifnotequal %}
+
 			<div class='info'>
-				Posted by {{t.post.author.get_profile.get_name}} {{t.post.posted_date|timesince}} ago
-				{% if s.project %}
-					in <a href="{% url project s.project.id %}">{{t.post.project.title}}</a>
-				{% endif %} | <a href="{% url post t.post.id %}">View this post</a> | <a href="{% url post t.post.id %}#comments">{{t.post.comment_count}}</a>
+				Posted by <a class='highlight' href="">{{t.post.author.get_profile.get_name}}</a> {{t.post.posted_date|timesince}} ago
+				{% if t.post.project %}
+					in <a href="{% url project t.post.project.id %}">{{t.post.project.title}}</a>
+				{% endif %} with <a href="{% url post t.post.id %}#comments">{{t.post.comment_count}}</a>
+				{% if t.post.assigned.all %}
+					assigned to 
+					{% ifequal t.post.assigned.all|length 1 %}
+						{% for u in t.post.assigned.all %}{{u.get_profile.get_name}}{% endfor %}
+					{% else %}
+						{{t.post.assigned.all|length}} people
+					{% endifequal %}
+				{% endif %}
+				{% if t.post.is_completed %}
+					| Completed
+				{% endif %}
 				<span class='controls'>
 					{% if user|ispined:t.post %}<a class='left' href="{% url unpin t.post.id %}?next={{request.path}}">Unpin</a>{% else %}<a class='left' href="{% url pin t.post.id %}?next={{request.path}}">Pin to board</a>{% endif %}
 					 | {% if user|istask:t.post %}<a class='right' href="{% url remove_task t.post.id %}?next={{request.path}}">Remove from tasks</a>{% else %}<a class='right' href="{% url add_task t.post.id %}?next={{request.path}}">Add to tasks</a>{% endif %}
@@ -28,6 +81,7 @@
 				</span>
 			</div>
 		</div>
+		
 		{% endif %}
 		{% endfor %}
 		
@@ -35,7 +89,7 @@
 		{% if t.is_completed %}
 		
 		<div class='item_complete'>
-			<h1 class="title">{{t.post.title}} {% if t.assigned_by %}<small>Assigned By {{t.assigned_by.get_profile.get_name}}</small>{% endif %}</h1>
+			<h1 class="title">{{t.post.title}}</h1>
 			<div class='reopen_info'>
 				<a href="{% url complete_task t.id %}">Reopen Task</a>
 			</div>

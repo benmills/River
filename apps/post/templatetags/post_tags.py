@@ -8,13 +8,13 @@ from project.models import *
 
 register = template.Library()	
 
-@register.inclusion_tag('stream/partials/stream_item.html')
+@register.inclusion_tag('posts/partials/stream_item.html')
 def post(item):
 	return {
 		's': item
 	}
 
-@register.inclusion_tag('stream/partials/stream.html')
+@register.inclusion_tag('posts/partials/stream.html')
 def post_stream(request, project_id=None):
 	try: user_filter = request.user.filters.all()[0]
 	except: 
@@ -43,7 +43,7 @@ def post_stream(request, project_id=None):
 		'project_id': project_id,
 	}
 	
-@register.inclusion_tag('stream/partials/poster.html')
+@register.inclusion_tag('posts/partials/poster.html')
 def poster(project_id=None):
 	return {
 		'file_formset': PostFileFormSet(prefix='files'),
@@ -54,7 +54,7 @@ def poster(project_id=None):
 		'project_id':project_id,
 	}	
 	
-@register.inclusion_tag('stream/partials/comment.html')
+@register.inclusion_tag('posts/partials/comment.html')
 def comment(comment):
 	return {
 		'comment':comment

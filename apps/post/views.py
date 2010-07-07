@@ -53,7 +53,7 @@ def add_post(request):
 @login_required
 def main_stream(request):
 	add_post(request)
-	return render_to_response("stream/main.html", {
+	return render_to_response("posts/main.html", {
 		'projects':Project.objects.all(),
 		'users':User.objects.all(),
 		'request':request,
@@ -71,6 +71,10 @@ def edit_post(request, id):
 				# Save files
 				files = EditPostFileFormSet(request.POST, request.FILES, instance=p, prefix='files')
 				files.save()
+				
+				# Save todo items
+				todo = EditTodoFormSet(request.POST, instance=p, prefix='todos')
+				todo.save()
 				
 				# p.content = request.POST['content']
 				# p.title = request.POST['title']
@@ -90,11 +94,11 @@ def post(request, id):
 		Comment(comment=request.POST['comment'], post=post, author=request.user).save()
 		post.save()
 
-	return render_to_response("stream/post.html", {
+	return render_to_response("posts/post.html", {
 		'post':post,
 		'request':request,
 		'file_formset': EditPostFileFormSet(prefix='files', instance=post),
-		'todo_formset': TodoFormSet(prefix='todos', instance=post),
+		'todo_formset': EditTodoFormSet(prefix='todos', instance=post),
 		'form': PostForm(instance=post),
 		'users': User.objects.all(),
 	}, context_instance=RequestContext(request))

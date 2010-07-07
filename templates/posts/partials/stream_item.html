@@ -1,0 +1,73 @@
+{% load markup %}
+{% load post_filters %}
+{% load post_tags %}
+
+<div class='item{% cycle '' ' odd' %}'>
+	<div class='item_content'>
+		<h1 class="title">
+			<a href="{% url post s.id %}">{{s.title}}</a>
+			<a href="#" class='post_project_name'>
+				{% if s.project %}
+					{{s.project}}
+				{% else %}
+					Main Stream
+				{% endif %}
+				
+			</a>
+		</h1>
+	
+		{% if s.todoitem_set.all %}
+			<div class='todo_list'>
+				{% for todo in s.todoitem_set.all %}
+					{% if not todo.is_completed %}
+						<p><input type='checkbox' class='inline_todo' value='{{todo.id}}'> {{todo.content}}</p>
+					{% else %}
+						<p><input type='checkbox' checked='checked' disabled='disabled'> {{todo.content}} <i>completed by {{todo.completed_by.get_profile.get_name}} {{todo.completed_date|timesince}} ago</i></p>
+					{% endif %}
+				{% endfor %}
+			</div>
+		{% endif %}
+	
+		{{s.content|urlize|textile}}
+	
+		{% if s.postfile_set.all %}
+		<div class="files">
+			{% for f in s.postfile_set.all %}
+				<a href="/media/{{f.file}}" target="_blank">{{f.get_name}}</a><br/>
+			{% endfor %}
+		</div>
+
+		{% endif %}
+	
+	</div>
+	
+	{% ifnotequal s.posted_date|date:"d/m/Y/H:i:s" s.updated|date:"d/m/Y/H:i:s"  %}
+		{# {% if s.last_comment %} #}
+		{# 	<div class='latest_comment'> #}
+		{# 		{% comment s.last_comment %} #}
+		{# 	</div> #}
+		{# {% endif %} #}
+	{% endifnotequal %}
+	
+	<div class='info'>
+		Posted by <a class='highlight' href="">{{s.author.get_profile.get_name}}</a> {{s.posted_date|timesince}} ago
+		{% if s.project %}
+			in <a href="{% url project s.project.id %}">{{s.project.title}}</a>
+		{% endif %} with <a href="{% url post s.id %}#comments">{{s.comment_count}}</a>
+		{% if s.assigned.all %}
+			assigned to 
+			{% ifequal s.assigned.all|length 1 %}
+				{% for u in s.assigned.all %}{{u.get_profile.get_name}}{% endfor %}
+			{% else %}
+				{{s.assigned.all|length}} people
+			{% endifequal %}
+		{% endif %}
+		{% if s.is_completed %}
+			| Completed
+		{% endif %}
+		<span class='controls'>
+			{% if user|ispined:s %}<a class='left' href="{% url unpin s.id %}?next={{request.path}}">Unpin</a>{% else %}<a class='left' href="{% url pin s.id %}?next={{request.path}}">Pin to board</a>{% endif %}
+			 | {% if user|istask:s %}<a class='right' href="{% url remove_task s.id %}?next={{request.path}}">Remove from tasks</a>{% else %}<a class='right' href="{% url add_task s.id %}?next={{request.path}}">Add to tasks</a>{% endif %}
+		</span>
+	</div>
+</div>

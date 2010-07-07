@@ -17,11 +17,12 @@ a:hover {
 }
 
 .clear{ clear: both; }
+.hide { display: none; }
 
 #header {
-	margin: 0 auto; padding: 20px 0 20px 0;
+	margin: 0 auto; padding: 17px 0 17px 0;
 	width: auto;
-	background: #253d5a;
+	background: red url('/media/imgs/top-header-background.png') repeat-x;
 	color: #b6e4f0;
 }
 	#header h1 {
@@ -110,11 +111,14 @@ a:hover {
 		margin: 0px 5px;
 	}
 	#poster .extras {
-		margin: 0px 440px 0px 0px;
+		margin: 0px 405px 0px 0px;
 		padding: 0px 0px 0px 15px;
 		border-left: 1px dotted #969696;
 		float: right;
 	}
+		#poster .extras a {
+			margin: 0px 10px 0px 0px;
+		}
 		#poster .controls select {
 			width: 103px;
 		}
@@ -158,11 +162,27 @@ a:hover {
 	
 /* Stream */
 
+.day_div {
+	float: left;
+	clear: left;
+	background: url('/media/imgs/date-line.png') repeat-x 0px 8px;
+	width: 900px;
+	line-height: 20px;
+	margin: 0px 0px 35px 0px;
+	padding: 0px 0px 0px 60px;
+}
+	.day_div:first-child {
+		margin: 30px 0px 35px 0px;
+	}
 h2.day_title {
-	margin: 30px 0px; padding: 0px 0px 0px 50px;
 	font-size: 13px;
 	color: #698fbd;
 }
+	h2.day_title span {
+		background: #2f517b;
+		display: inline-block;
+		padding: 0px 10px 0px 10px;
+	}
 
 #stream {
 	margin: 10px 0px 0px 0px;
@@ -192,7 +212,7 @@ h2.day_title {
 			width: 600px;
 		}
 		#stream .item .item_content {
-			padding: 30px;
+			padding: 25px 30px 20px 30px;
 		}
 		#stream .item .info {
 			background: #264264;
@@ -208,7 +228,7 @@ h2.day_title {
 			color: #5a85ba;
 		}
 		#stream h1.title {
-			margin: 0px 0px 20px 0px;
+			margin: 0px 0px 10px 0px;
 			font-size: 24px;
 		}
 			#stream h1.title a {
@@ -225,11 +245,16 @@ h2.day_title {
 			color: #cfcfcf;
 			float: left;
 			clear: left;
-			width: 880px;
+			width: 900px;
 			background: #264264;
 			color: #b6e4f0;
-			padding: 30px 40px 30px 40px;
+			padding: 20px 30px;
 		}
+			#stream .item h1.title a.post_project_name {
+				display: block;
+				font-size: 13px;
+				color: #7c7c7c;
+			}
 			.project_items #stream .item .info {
 				width: 520px;
 			}
@@ -260,9 +285,19 @@ h2.day_title {
 				border-bottom: 1px dotted #aaaaaa;
 			}
 			#stream .item .todo_list {
-				padding: 6px; margin: 0px 0px 10px 0px;
+				padding: 13px; margin: 0px 0px 10px 0px;
 				background: #e5e5e5;
 			}
+				#stream .item .todo_list p {
+					margin: 3px 0px 0px 0px;
+				}
+				#stream .item .todo_list p:first-child {
+					margin: 0px 0px 0px 0px;
+				}
+				#stream .item .todo_list i {
+					font-size: 10px;
+					color: #a5a5a5;
+				}
 
 /* Tasks */
 .item_complete {
@@ -294,17 +329,74 @@ h2.day_title {
 /* Edit Form */
 .edit_form {
 	/*display: none;*/
+	padding: 30px;
+}
+.edit_form label {
+	float: left;
+	display: block;
+	width: 75px;
+	margin: 0px 10px 0px 0px;
+	text-align: right;
 }
 .edit_form textarea {
-	width: 956px;
+	width: 795px;
+	font-size: 24px;
+	border: 1px solid #a5a5a5;
+	font-size: 14px;
+	padding: 7px 9px;
+	margin: 0px 0px 10px 0px;
 	height: 350px;
-	font-size: 15px;
+	font-family: 'Trebuchet MS', Helvetica;
+}
+	.edit_form .todo_edit textarea {
+		display: inline;
+		width: 200px;
+		height: 20px;
+	}
+.edit_form .edit_attachments {
+	width: 795px;
+	float: left;
+}
+.edit_form textarea:focus, .edit_form input.text:focus {
+	-moz-box-shadow: 1px 1px 4px #adb5be;
+	-webkit-box-shadow: 1px 1px 4px #18293e;
+	box-shadow: 1px 1px 4px #18293e;
 }
 .edit_form input.text {
-	width: 954px;
+	width: 795px;
 	font-size: 24px;
+	border: 1px solid #a5a5a5;
+	font-size: 16px;
+	padding: 7px 9px;
+	margin: 0px 0px 20px 0px;
 }
-				
+.edit_form .edit_footer {
+	margin: 15px 0px 30px 0px;
+	padding: 15px 0px 0px 0px;
+	border-top: 1px dotted #aaaaaa;
+	float: left;
+	width: 900px;
+}
+.edit_form .edit_header {
+	margin: 0px 0px 30px 0px;
+	padding: 0px 0px 15px 0px;
+	border-bottom: 1px dotted #aaaaaa;
+	float: left;
+	width: 900px;
+	font-size: 22px;
+}
+.edit_form .edit_attachments h1 {
+	margin: 0px 0px 15px 0px;
+}
+a.delete_soft_item_edit, a.delete_soft_item {
+	background: url('/media/imgs/delete-off.png') no-repeat;
+	width: 14px;
+	height: 12px;
+	display: inline-block;
+}
+	a.delete_soft_item_edit:hover, a.delete_soft_item:hover {
+		background: url('/media/imgs/delete-over.png') no-repeat;
+	}
 /* Post Info */
 .post_info {
 	padding: 10px;
@@ -344,6 +436,17 @@ h2.day_title {
 			-moz-border-top-right-radius: 10px;
 			-moz-border-bottom-right-radius: 10px;
 		}
+
+/* File List */
+.item .files {
+	margin: 20px 0px 0px 0px;
+	padding: 15px 0px 0px 0px;
+	border-top: 1px dotted #aaaaaa;
+}
+	.item .files a {
+		color: #7c7c7c;
+		font-size: 13px;
+	}
 				
 /* Comments */
 .comment_div {
@@ -366,9 +469,9 @@ h2.day_title {
 			margin: 0px 0px 10px 0px;
 		}
 		.comment .posted {
-			float: right;
 			color: #808080;
 			font-style:italic;
+			font-size: 10px;
 		}
 	form.add_comment textarea {
 		width: 900px;

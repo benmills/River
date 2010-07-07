@@ -12,6 +12,7 @@ class PostForm(forms.ModelForm):
 		fields = ('content', 'title', 'assigned')
 		
 class TodoForm(forms.ModelForm):
+	content = forms.CharField()
 	class Meta:
 		model = TodoItem
 		fields = ('post', 'content')
@@ -29,3 +30,4 @@ class FilterForm(forms.ModelForm):
 PostFileFormSet = inlineformset_factory(Post, PostFile, extra=1, form=PostFileForm, can_delete=False)
 EditPostFileFormSet = inlineformset_factory(Post, PostFile, extra=1, form=PostFileForm)
 TodoFormSet = inlineformset_factory(Post, TodoItem, extra=1, form=TodoForm, can_delete=False)
+EditTodoFormSet = inlineformset_factory(Post, TodoItem, extra=1, form=TodoForm)
