@@ -18,3 +18,10 @@ Installation
 1. Create your local version of settings.py, copy settings.example.py and replace the PATH variable with the full path to your installation
 2. Run @python manage.py syncdb@ and make sure to create a super user
 3. Run @python manage.py runserver_plus@, browse to 127.0.0.1:8000 and enjoy!
+
+Todo List
+=============
+1. Multiple Company Support
+2. Subdomain routing
+3. S3 Support
+4. Authorize.net support
