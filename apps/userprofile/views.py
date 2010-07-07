@@ -8,6 +8,7 @@ from itertools import chain
 
 from userprofile.models import *
 from userprofile.forms import *
+from post.models import *
 
 def register(request):
 	if request.method == "POST" and request.POST['username'] and request.POST['password']:
