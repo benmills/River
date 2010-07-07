@@ -47,7 +47,6 @@
 
 				{% if post.postfile_set.all %}
 				<div class="files">
-					<h2>Files</h2>
 					{% for f in post.postfile_set.all %}
 						<a href="/media/{{f.file}}" target="_blank">{{f.get_name}}</a><br/>
 					{% endfor %}
