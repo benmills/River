@@ -13,13 +13,12 @@
 {% block content %}	
 	<div id="stream" class="full_width">
 		
-		
 		{% load markup %}
 		{% load post_filters %}
 		{% load post_tags %}
 
 		<div class='item no_shadow'>
-			<div class='item_content hide'>
+			<div class='item_content'>
 				<h1 class="title">
 					<a href="{% url post post.id %}">{{post.title}}</a>
 					<a href="#" class='post_project_name'>
@@ -59,7 +58,7 @@
 			</div>
 
 			{% ifequal user post.author  %}
-				<form class="edit_form" method="post" action="{% url edit_post post.id %}" enctype="multipart/form-data">
+				<form class="edit_form hide" method="post" action="{% url edit_post post.id %}" enctype="multipart/form-data">
 					<div class='edit_header'>
 						Editing: {{post.title}}
 					</div>
@@ -105,12 +104,12 @@
 					</div>
 					
 					<div class='edit_footer'>
-						<input type="submit" value="Save Changes"> <a href="#" class="cancel_edit">Nevermind</a>
+						<input type="submit" value="Save Changes"> <a href="{% url post post.id %}">Nevermind</a>
 					</div>
 				</form>
 			{% endifequal %}
 
-			<div class='comment_div hide'>
+			<div class='comment_div'>
 				<div class='comments'>
 					{% for comment in post.comment_set.all %}
 						{% comment comment %}
@@ -127,7 +126,7 @@
 				</form>
 			</div>
 
-			<div class='info hide'>
+			<div class='info'>
 				Posted by <a class='highlight' href="">{{post.author.get_profile.get_name}}</a> {{post.posted_date|timesince}} ago
 				{% if post.project %}
 					in <a href="{% url project post.project.id %}">{{post.project.title}}</a>
@@ -146,6 +145,9 @@
 				<span class='controls'>
 					{% if user|ispined:post %}<a class='left' href="{% url unpin post.id %}?next={{request.path}}">Unpin</a>{% else %}<a class='left' href="{% url pin post.id %}?next={{request.path}}">Pin to board</a>{% endif %}
 					 | {% if user|istask:post %}<a class='right' href="{% url remove_task post.id %}?next={{request.path}}">Remove from tasks</a>{% else %}<a class='right' href="{% url add_task post.id %}?next={{request.path}}">Add to tasks</a>{% endif %}
+					{% ifequal user post.author %}
+						| <a href="#" class='edit_post_link'>Edit</a>
+					{% endifequal %}
 				</span>
 			</div>
 			
