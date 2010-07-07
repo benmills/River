@@ -17,6 +17,7 @@ def register(request):
 			u.set_password(request.POST['password'])
 			u.save()
 			UserProfile(user=u).save()
+			Filter(owner=u).save()
 			auth_login(request, authenticate(username=username, password=request.POST['password']))
 			return redirect('/')
 			
