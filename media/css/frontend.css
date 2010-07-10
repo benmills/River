@@ -43,6 +43,7 @@ a:hover {
 		
 	#user_info {
 		float: right;
+		margin-top: 4px;
 	}
 	
 	#header #user_info a{ margin: 0 5px 0 0; }
@@ -92,6 +93,7 @@ a:hover {
 		background: url('/media/imgs/post-button.png');
 		width: 64px; height: 32px;
 		border: none;
+		cursor: pointer;
 	}
 	#poster .controls {
 		padding: 3px 0px;
@@ -199,9 +201,9 @@ h2.day_title {
 	#stream .item {
 		margin: 0 0 40px 0; padding: 0;
 		background: #f3f3f3;
-		-moz-box-shadow: 1px 1px 4px #18293e;
-		-webkit-box-shadow: 1px 1px 4px #18293e;
-		box-shadow: 1px 1px 4px #18293e;
+		-moz-box-shadow: 0 1px 4px #18293e;
+		-webkit-box-shadow: 0 1px 4px #18293e;
+		box-shadow: 0 1px 4px #18293e;
 		line-height: 20px;
 		float: left;
 		clear: left;
@@ -301,25 +303,25 @@ h2.day_title {
 
 /* Tasks */
 .item_complete {
-	margin: 0 0 20px 0; padding: 10px;
-	background: #7591b4;
-	-moz-box-shadow: 1px 1px 4px #18293e;
+	margin: 0 0 20px 0; padding: 10px 30px;
+	background: #264264; /* 7591b4 */
+	/*-moz-box-shadow: 1px 1px 4px #18293e;
 	-webkit-box-shadow: 1px 1px 4px #18293e;
-	box-shadow: 1px 1px 4px #18293e;
+	box-shadow: 1px 1px 4px #18293e;*/
 	line-height: 20px;
 	float: left;
 	clear: left;
-	width: 940px;
+	width: 900px;
 	font-size: 13px;
 }
 	.item_complete a {
-		color: #3f4c5c;
+		color: #FFF;
 	}
 	#stream .item_complete h1.title {
 		font-size: 14px;
 		float: left;
 		margin: 0px 0px 0px 0px;
-		color: #3f4c5c;
+		color: #f3f3f3;
 	}
 	.item_complete .reopen_info {
 		float: right;
@@ -573,7 +575,7 @@ a.delete_soft_item_edit, a.delete_soft_item {
 	}
 	
 .filter {
-	margin: 0px 0px 10px 0px;
+	margin: 0px 0px 17px 0px;
 	color: #b6e4f0;
 	text-align: right;
 }
