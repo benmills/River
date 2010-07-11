@@ -13,7 +13,11 @@
 		{% ifchanged s.posted_date.day %}
 			</span>
 			</div>
-			<div class='day_div'><h2 class='day_title'>{{s.posted_date|date:"l d M"}}</h2></div>
+			
+			<div class='day_div'>
+				<h2 class='day_title'>{{s.posted_date|date:"l d M"}}</h2>
+			</div>
+			
 			<div id="stream"{% if not project_id %} class='full_width'{% endif %}>
 			<span class='items'>
 		{% endifchanged %}

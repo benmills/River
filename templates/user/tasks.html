@@ -74,12 +74,33 @@
 				{% if t.post.is_completed %}
 					| Completed
 				{% endif %}
-				<span class='controls'>
-					{% if user|ispined:t.post %}<a class='left' href="{% url unpin t.post.id %}?next={{request.path}}">Unpin</a>{% else %}<a class='left' href="{% url pin t.post.id %}?next={{request.path}}">Pin to board</a>{% endif %}
-					 | {% if user|istask:t.post %}<a class='right' href="{% url remove_task t.post.id %}?next={{request.path}}">Remove from tasks</a>{% else %}<a class='right' href="{% url add_task t.post.id %}?next={{request.path}}">Add to tasks</a>{% endif %}
-					 | <a href="{% url complete_task t.id %}">{% if t.is_completed %}Reopen Task{% else %}Complete Task{% endif %}</a>
-				</span>
+				
 			</div>
+			
+			<ul class='controls'>
+				
+				<li class="board">
+					{% if user|ispined:t.post %}
+					<a class='left' href="{% url unpin t.post.id %}?next={{request.path}}">Unpin</a>
+					{% else %}
+					<a class='left' href="{% url pin t.post.id %}?next={{request.path}}">Pin to board</a>
+					{% endif %}
+				</li>
+				
+				<li class="task">
+					{% if user|istask:t.post %}
+					<a class='right' href="{% url remove_task t.post.id %}?next={{request.path}}">Remove from tasks</a>
+					{% else %}
+					<a class='right' href="{% url add_task t.post.id %}?next={{request.path}}">Add to tasks</a>
+					{% endif %}
+				</li>
+				
+				<li class="task">
+					<a href="{% url complete_task t.id %}">{% if t.is_completed %}Reopen Task{% else %}Complete Task{% endif %}</a>
+				</li>
+				
+			</ul>
+			
 		</div>
 		
 		{% endif %}

@@ -65,9 +65,27 @@
 		{% if s.is_completed %}
 			| Completed
 		{% endif %}
-		<span class='controls'>
-			{% if user|ispined:s %}<a class='left' href="{% url unpin s.id %}?next={{request.path}}">Unpin</a>{% else %}<a class='left' href="{% url pin s.id %}?next={{request.path}}">Pin to board</a>{% endif %}
-			 | {% if user|istask:s %}<a class='right' href="{% url remove_task s.id %}?next={{request.path}}">Remove from tasks</a>{% else %}<a class='right' href="{% url add_task s.id %}?next={{request.path}}">Add to tasks</a>{% endif %}
-		</span>
+		
 	</div>
+	
+	<ul class='controls'>
+		
+		<li class="board">
+			{% if user|ispined:s %}
+			<a href="{% url unpin s.id %}?next={{request.path}}">Unpin</a>
+			{% else %}
+			<a href="{% url pin s.id %}?next={{request.path}}">Pin to board</a>
+			{% endif %}
+		</li>
+		
+		<li class="task">
+		{% if user|istask:s %}
+			<a href="{% url remove_task s.id %}?next={{request.path}}">Remove from tasks</a>
+			{% else %}
+			<a href="{% url add_task s.id %}?next={{request.path}}">Add to tasks</a>
+		{% endif %}
+		</li>
+		
+	</ul>
+	
 </div>

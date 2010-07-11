@@ -11,9 +11,11 @@ body {
 
 a {
 	color: #3c87c7;
+	text-decoration: none;
 }
 a:hover {
 	color: #4497dd;
+	text-decoration: underline;
 }
 
 .clear{ clear: both; }
@@ -168,13 +170,14 @@ a:hover {
 	float: left;
 	clear: left;
 	background: url('/media/imgs/date-line.png') repeat-x 0px 8px;
-	width: 900px;
+	width: 940px;
 	line-height: 20px;
-	margin: 0px 0px 35px 0px;
-	padding: 0px 0px 0px 60px;
+	margin: 10px 0px 50px 0px;
+	padding: 0px 0px 0px 20px;
+	text-transform: lowercase;
 }
 	.day_div:first-child {
-		margin: 30px 0px 35px 0px;
+		margin: 45px 0px 50px 0px;
 	}
 h2.day_title {
 	font-size: 13px;
@@ -183,7 +186,7 @@ h2.day_title {
 	h2.day_title span {
 		background: #2f517b;
 		display: inline-block;
-		padding: 0px 10px 0px 10px;
+		padding: 0px 20px;
 	}
 
 #stream {
@@ -198,27 +201,28 @@ h2.day_title {
 	}
 	
 
-	#stream .item {
+	.item {
 		margin: 0 0 40px 0; padding: 0;
 		background: #f3f3f3;
-		-moz-box-shadow: 0 1px 4px #18293e;
-		-webkit-box-shadow: 0 1px 4px #18293e;
-		box-shadow: 0 1px 4px #18293e;
+		-moz-box-shadow: 0 1px 4px #111d2c;
+		-webkit-box-shadow: 0 1px 4px #111d2c;
+		box-shadow: 0 1px 4px #111d2c;
 		line-height: 20px;
 		float: left;
 		clear: left;
 		width: 960px;
 		font-size: 13px;
+		position: relative;
 	}
 		.project_items #stream .item {
 			width: 600px;
 		}
 		#stream .item .item_content {
-			padding: 25px 30px 20px 30px;
+			padding: 30px 40px 30px 40px;
 		}
 		#stream .item .info {
 			background: #264264;
-			padding: 30px;
+			padding: 20px 40px;
 		}
 			#stream .item .info a.highlight {
 				color: #ffd77f;
@@ -237,6 +241,10 @@ h2.day_title {
 				color: #4b4b4b;
 				text-decoration: none;
 			}
+			#stream h1.title a:hover,
+			#stream .item h1.title a.post_project_name:hover {
+				color: #c5911f;
+			}
 			#stream h1 small {
 				font-size: 18px;
 				color: #999;
@@ -247,10 +255,8 @@ h2.day_title {
 			color: #cfcfcf;
 			float: left;
 			clear: left;
-			width: 900px;
-			background: #264264;
+			width: 880px;
 			color: #b6e4f0;
-			padding: 20px 30px;
 		}
 			#stream .item h1.title a.post_project_name {
 				display: block;
@@ -264,42 +270,86 @@ h2.day_title {
 				color: #ffd77f;
 				text-decoration: none;
 			}
-			#stream .item .controls {
-				float: right;
+			#stream .item .info a:hover {
+				text-decoration: underline;
 			}
-		#stream .latest_comment {
-			float: left; clear: left;
-			background: #f6f6f6;
-			width: 880px;
-			padding: 20px 40px 20px 40px;
+			
+			
+/* Controls */	
+	.item ul.controls {
+		display: none;
+		background: #FFF;
+		border-top: solid 1px #a7a7a7;
+		-moz-box-shadow: 0 1px 2px #AAA;
+		-webkit-box-shadow: 0 1px 2px #AAA;
+		box-shadow: 0 1px 2px #AAA;
+		padding: 10px 10px 10px 20px;
+		position: absolute;
+		top: 20px;
+		right: 40px;
+		list-style: none;
+		margin: 0;
+	}
+	.item:hover ul.controls {
+		display: block;
+	}
+	.item ul.controls li {
+		display: inline;
+		margin-right: 10px;
+		float: left;
+	}
+	.item ul.controls li a {
+		color: #7c7c7c;
+		text-decoration: none;
+		padding: 0 0 0 20px;
+	}
+	.item ul.controls li a:hover {
+		color: #c5911f;
+		text-decoration: underline;
+	}
+	.item ul.controls li.board a {
+		background: url('/media/imgs/star.gif') left center no-repeat transparent;
+	}
+	.item ul.controls li.task a {
+		background: url('/media/imgs/tick.gif') left center no-repeat transparent;
+	}
+			
+			
+/* Comments & todo list */	
+	#stream .latest_comment {
+		float: left; clear: left;
+		background: #f6f6f6;
+		width: 880px;
+		padding: 20px 40px 20px 40px;
+	}
+		#stream .latest_comment h3 {
+			font-weight: bold;
+			color: #cfcfcf;
 		}
-			#stream .latest_comment h3 {
-				font-weight: bold;
-				color: #cfcfcf;
+		#stream .latest_comment h3, #stream .latest_comment {
+			font-size: 13px;
+		}
+		#stream .latest_comment .comment {
+			margin: 0px 0px 0px 0px;
+		}
+		#stream .item h2 {
+			border-bottom: 1px dotted #aaaaaa;
+		}
+		#stream .item .todo_list {
+			padding: 13px; margin: 0px 0px 10px 0px;
+			background: #e5e5e5;
+		}
+			#stream .item .todo_list p {
+				margin: 3px 0px 0px 0px;
 			}
-			#stream .latest_comment h3, #stream .latest_comment {
-				font-size: 13px;
-			}
-			#stream .latest_comment .comment {
+			#stream .item .todo_list p:first-child {
 				margin: 0px 0px 0px 0px;
 			}
-			#stream .item h2 {
-				border-bottom: 1px dotted #aaaaaa;
+			#stream .item .todo_list i {
+				font-size: 10px;
+				color: #a5a5a5;
 			}
-			#stream .item .todo_list {
-				padding: 13px; margin: 0px 0px 10px 0px;
-				background: #e5e5e5;
-			}
-				#stream .item .todo_list p {
-					margin: 3px 0px 0px 0px;
-				}
-				#stream .item .todo_list p:first-child {
-					margin: 0px 0px 0px 0px;
-				}
-				#stream .item .todo_list i {
-					font-size: 10px;
-					color: #a5a5a5;
-				}
+			
 
 /* Tasks */
 .item_complete {
